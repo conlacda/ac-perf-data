@@ -1,0 +1,7 @@
+__pycache__
+.env
+logs.txt*
+.vscode
+cookies
+*.py
+requirements.txt
