@@ -7,8 +7,7 @@ import argparse
 from fetch import fetch
 from dotenv import load_dotenv
 from constants import ACTIVE_USERS_URL, CONTEST_TYPE
-from performance import fetch_user_perf
-from jobs import dump_rounded_perf_of_all_into_a_file
+from performance import fetch_user_perf, dump_perf_history
 from util import commit_to_github
 from logger import logger
 
@@ -28,7 +27,7 @@ def resolve_users_on(contest_type: CONTEST_TYPE, page=1) -> None:
 
     for user in tqdm(users):
         perfs = fetch_user_perf(user, contest_type)
-        dump_rounded_perf_of_all_into_a_file(user, perfs, contest_type)
+        dump_perf_history(user, perfs, contest_type)
 
 
 def setup() -> None:
