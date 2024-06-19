@@ -7,7 +7,8 @@ import argparse
 from fetch import fetch
 from dotenv import load_dotenv
 from constants import ACTIVE_USERS_URL, CONTEST_TYPE
-from performance import dump_rounded_perf_of_all_into_a_file, fetch_user_perf
+from performance import fetch_user_perf
+from jobs import dump_rounded_perf_of_all_into_a_file
 from util import commit_to_github
 from logger import logger
 
