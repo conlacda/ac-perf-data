@@ -54,3 +54,4 @@
 2024-06-20 15:15:24,018 - INFO - Getting data of page 33 from once.py line 72
 2024-06-20 15:16:34,145 - INFO - Getting data of page 34 from once.py line 72
 2024-06-20 15:17:44,302 - INFO - Getting data of page 35 from once.py line 72
+2024-06-20 15:18:54,631 - INFO - Getting data of page 36 from once.py line 72
