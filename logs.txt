@@ -15,3 +15,8 @@
 2024-06-20 14:35:00,477 - INFO - There are 1129 pages
  from once.py line 70
 2024-06-20 14:35:00,477 - INFO - Getting data of page 3 from once.py line 72
+2024-06-20 14:37:46,527 - INFO - Logged in! from fetch.py line 65
+2024-06-20 14:37:46,549 - INFO - Getting data of algo contests from once.py line 68
+2024-06-20 14:37:47,893 - INFO - There are 1129 pages
+ from once.py line 70
+2024-06-20 14:37:47,893 - INFO - Getting data of page 1 from once.py line 72
