@@ -1,0 +1,17 @@
+2024-06-20 14:24:56,489 - INFO - Logged in! from fetch.py line 65
+2024-06-20 14:24:56,562 - INFO - Getting data of algo contests from once.py line 68
+2024-06-20 14:24:57,919 - INFO - There are 1129 pages
+ from once.py line 70
+2024-06-20 14:24:57,920 - INFO - Getting data of page 1 from once.py line 72
+2024-06-20 14:26:07,572 - INFO - Getting data of page 2 from once.py line 72
+2024-06-20 14:27:17,316 - INFO - Getting data of page 3 from once.py line 72
+2024-06-20 14:28:26,553 - INFO - Getting data of page 4 from once.py line 72
+2024-06-20 14:29:35,547 - INFO - Getting data of page 5 from once.py line 72
+2024-06-20 14:30:44,594 - INFO - Getting data of page 6 from once.py line 72
+2024-06-20 14:33:27,034 - INFO - Logged in! from fetch.py line 65
+2024-06-20 14:33:27,055 - INFO - Getting data of algo contests from once.py line 68
+2024-06-20 14:34:59,093 - INFO - Logged in! from fetch.py line 65
+2024-06-20 14:34:59,115 - INFO - Getting data of algo contests from once.py line 68
+2024-06-20 14:35:00,477 - INFO - There are 1129 pages
+ from once.py line 70
+2024-06-20 14:35:00,477 - INFO - Getting data of page 3 from once.py line 72
