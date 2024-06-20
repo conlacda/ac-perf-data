@@ -1,13 +1,15 @@
 import subprocess
 from bs4 import BeautifulSoup
-from typing import List, Literal
-import json
+from typing import List
 from tqdm import tqdm
-from os import path, getenv
+from os import getenv
 import argparse
 from fetch import fetch
 from dotenv import load_dotenv
-from constants import ACTIVE_USERS_URL, COMPETITION_HISTORY_URL, CONTEST_TYPE
+from constants import ACTIVE_USERS_URL, CONTEST_TYPE
+from performance import fetch_user_perf, dump_perf_history
+from util import commit_to_github
+from logger import logger
 
 
 def number_active_users_page(contest_type: CONTEST_TYPE) -> int:
@@ -24,33 +26,8 @@ def resolve_users_on(contest_type: CONTEST_TYPE, page=1) -> None:
     users: List[str] = [item.text for item in source.select("a.username")]
 
     for user in tqdm(users):
-        save_user_competition_performance(user, contest_type)
-
-
-def save_user_competition_performance(
-    username: str, contest_type: CONTEST_TYPE
-) -> None:
-    rated_peformance = get_rated_competition_performance(username, contest_type)
-    with open(f"competition-history/{contest_type}/{username}.json", "w") as json_file:
-        json.dump(rated_peformance, json_file)
-
-
-def get_rated_competition_performance(
-    username: str, contest_type: CONTEST_TYPE
-) -> List[int]:
-    data = fetch(COMPETITION_HISTORY_URL[contest_type].format(username), "json")
-    # Keep only inner performance
-    rated_peformance = []
-    for item in data:
-        if item.get("IsRated"):
-            rated_peformance.append(item.get("InnerPerformance"))
-    return rated_peformance
-
-
-def commit_to_github() -> None:
-    subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", "auto commit"])
-    subprocess.run(["git", "push"])
+        perfs = fetch_user_perf(user, contest_type)
+        dump_perf_history(user, perfs, contest_type)
 
 
 def setup() -> None:
@@ -88,10 +65,10 @@ if __name__ == "__main__":
 
     setup()
 
-    print(f"Getting data of {args.type} contests")
+    logger.info(f"Getting data of {args.type} contests")
     last_page: int = number_active_users_page(contest_type)
-    print(f"There are {last_page} pages\n")
+    logger.info(f"There are {last_page} pages\n")
     for page in range(start_page, last_page + 1):
-        print(f"Getting data of page {page}")
+        logger.info(f"Getting data of page {page}")
         resolve_users_on(contest_type, page)
         commit_to_github()
