@@ -61,7 +61,7 @@ def setup() -> None:
             "remote",
             "set-url",
             "origin",
-            f"https://conlacda:{getenv('GITHUB_TOKEN')}@github.com/conlacda/ac-competition-history.git",
+            f"https://conlacda:{getenv('GITHUB_TOKEN')}@github.com/conlacda/ac-perf-data.git",
         ]
     )
 
