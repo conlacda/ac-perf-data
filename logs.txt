@@ -20,3 +20,4 @@
 2024-06-20 14:37:47,893 - INFO - There are 1129 pages
  from once.py line 70
 2024-06-20 14:37:47,893 - INFO - Getting data of page 1 from once.py line 72
+2024-06-20 14:38:57,830 - INFO - Getting data of page 2 from once.py line 72
