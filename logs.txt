@@ -1019,3 +1019,4 @@
 2024-06-21 22:40:41,473 - INFO - Getting data of page 1077 from once.py line 72
 2024-06-21 22:42:01,239 - INFO - Getting data of page 1078 from once.py line 72
 2024-06-21 22:43:21,402 - INFO - Getting data of page 1079 from once.py line 72
+2024-06-21 22:44:40,853 - INFO - Getting data of page 1080 from once.py line 72
