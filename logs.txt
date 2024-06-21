@@ -440,3 +440,4 @@
 2024-06-21 08:42:28,054 - INFO - Getting data of page 503 from once.py line 72
 2024-06-21 08:43:40,574 - INFO - Getting data of page 504 from once.py line 72
 2024-06-21 08:44:53,487 - INFO - Getting data of page 505 from once.py line 72
+2024-06-21 08:46:06,798 - INFO - Getting data of page 506 from once.py line 72
