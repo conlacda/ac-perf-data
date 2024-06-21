@@ -452,3 +452,4 @@
 2024-06-21 08:57:03,988 - INFO - Getting data of page 515 from once.py line 72
 2024-06-21 08:58:16,932 - INFO - Getting data of page 516 from once.py line 72
 2024-06-21 08:59:29,815 - INFO - Getting data of page 517 from once.py line 72
+2024-06-21 09:00:42,464 - INFO - Getting data of page 518 from once.py line 72
