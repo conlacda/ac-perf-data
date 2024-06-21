@@ -684,3 +684,4 @@
 2024-06-21 14:53:11,408 - INFO - Getting data of page 742 from once.py line 72
 2024-06-21 14:54:28,423 - INFO - Getting data of page 743 from once.py line 72
 2024-06-21 14:55:46,543 - INFO - Getting data of page 744 from once.py line 72
+2024-06-21 14:57:04,718 - INFO - Getting data of page 745 from once.py line 72
