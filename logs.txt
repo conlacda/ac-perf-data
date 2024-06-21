@@ -911,3 +911,4 @@
 2024-06-21 19:44:58,256 - INFO - Getting data of page 969 from once.py line 72
 2024-06-21 19:46:16,925 - INFO - Getting data of page 970 from once.py line 72
 2024-06-21 19:47:36,210 - INFO - Getting data of page 971 from once.py line 72
+2024-06-21 19:48:54,937 - INFO - Getting data of page 972 from once.py line 72
