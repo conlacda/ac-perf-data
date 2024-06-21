@@ -928,3 +928,4 @@
 2024-06-21 20:07:19,179 - INFO - Getting data of page 986 from once.py line 72
 2024-06-21 20:08:38,072 - INFO - Getting data of page 987 from once.py line 72
 2024-06-21 20:09:57,180 - INFO - Getting data of page 988 from once.py line 72
+2024-06-21 20:11:15,939 - INFO - Getting data of page 989 from once.py line 72
