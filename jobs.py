@@ -103,9 +103,9 @@ def dump_contest_type(contest: Contest) -> None:
     Some contests have unusual names, such as "wtf19"
     So sometimes we can not determine the type of contests based on their names
     """
-    f = open(CONTEST_TYPE_DUMP.format(contest.short_name), "w")
-    json.dump({"type": contest.type}, f, indent=4)
-    f.close()
+    with open(CONTEST_TYPE_DUMP.format(contest.short_name), "w") as f:
+        json.dump({"type": contest.type}, f, indent=4)
+
     commit_to_github(f"Create contest type {contest.short_name}")
     return schedule.CancelJob
 

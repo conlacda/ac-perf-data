@@ -29,19 +29,15 @@ def load_saved_rounded_innner_perf(username: str, contest_type: CONTEST_TYPE) ->
 
 
 def dump_avg_innerperformance_all_participants(data: dict[str, (int | float)], contest: Contest) -> None:
-    f = open(AVG_PERF_DUMP[contest.type].format(contest.short_name), "w")
-    json.dump(data, f, indent=4)
-    f.close()
-
+    with open(AVG_PERF_DUMP[contest.type].format(contest.short_name), "w") as f:
+        json.dump(data, f, indent=4)
 
 # This function is only for the heuristic contests.
 # Because to calculate rating of an user in the heuristic contests we need all competition history
 # not last as the algo contests
 def dump_participants_competition_history(data: dict[str, List[int]], contest: Contest) -> None:
-    f = open(ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(contest.short_name), "w")
-    json.dump(data, f)
-    f.close()
-
+    with open(ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(contest.short_name), "w") as f:
+        json.dump(data, f)
 
 def avg_inner_performance_of_user(username: str, contest: Contest) -> (int | float):
     perf: dict[str, List[int]] = load_saved_rounded_innner_perf(username, contest.type)
@@ -185,9 +181,8 @@ def dump_rank_to_perf(contest: Contest, avg_innerperf: List[float]) -> None:
         prev_right = left
 
     # Dump to file
-    f = open(PERF_BY_RANKING[contest.type].format(contest.short_name), "w")
-    json.dump(perf_during_contest, f)
-    f.close()
+    with open(PERF_BY_RANKING[contest.type].format(contest.short_name), "w") as f:
+        json.dump(perf_during_contest, f)
 
     return perf_during_contest
 
