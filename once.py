@@ -38,7 +38,7 @@ def setup() -> None:
             "remote",
             "set-url",
             "origin",
-            f"https://conlacda:{getenv('GITHUB_TOKEN')}@github.com/conlacda/ac-perf-data.git",
+            f"https://conlacda:{getenv('GITHUB_TOKEN')}@github.com/conlacda/ac-competition-history.git",
         ]
     )
 
@@ -71,4 +71,4 @@ if __name__ == "__main__":
     for page in range(start_page, last_page + 1):
         logger.info(f"Getting data of page {page}")
         resolve_users_on(contest_type, page)
-        commit_to_github()
+        commit_to_github(f"Data of users on page {page}")

@@ -54,7 +54,7 @@ def dump_aperf_of_heuristic_participants(contest: Contest):
     logger.info(f"Updating data/{contest.short_name}_avg_perf.json file")
     aperfs = get_avg_inner_perf_all_participants(contest)
     dump_rank_to_perf(contest, aperfs)
-    commit_to_github()
+    commit_to_github(f"Dump aperf of all participants of contest {contest.short_name}")
 
 
 def dump_rounded_perf_of_all_into_a_file(contest: Contest):
@@ -81,7 +81,7 @@ def generate_data_algo_contest(contest: Contest) -> None | schedule.CancelJob:
     aperfs = get_avg_inner_perf_all_participants(contest)
     dump_rank_to_perf(contest, aperfs)
     dump_rounded_perf_of_all_into_a_file(contest)
-    commit_to_github()
+    commit_to_github(f"Calculate the prediction data for {contest.short_name}")
     return schedule.CancelJob
 
 # TODO: update not only the InnerPerformane, but Performance as well
@@ -93,7 +93,7 @@ def update_users_perf_based_on_final_result(
     """
     if contest.hasFixedResult():
         update_rated_participants_perf(contest)
-        commit_to_github()
+        commit_to_github(f"Update the performance of all participants - contest {contest.short_name}")
         return schedule.CancelJob
 
 
