@@ -94,7 +94,7 @@ def update_rated_participants_perf(contest: Contest) -> None:
             # otherwise, just update InnerPerformance by Performance
             username: str = item.get("UserScreenName")
             rounded_performance = item.get("Performance")
-            inner_performance = item.get("InnerPerformance")
+            inner_performance = rounded_performance
             # If someone joins the contest at the last minute and has no the perf history file.
             # Their perf history should be fetched from Atcoder
             if rounded_performance == contest.max_perf or not path.exists(
