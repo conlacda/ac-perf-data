@@ -86,21 +86,35 @@ class Contest:
 
 
 class ContestManager:
-    _contests: List[Contest] = []
+    _contest_names: List[str] = []
+    _resolved_upcoming_contest_names: List[str] = []
 
     def __init__(self):
         pass
 
+    def upcoming_contests(self, timedelta_hours=1) -> List[Contest]:
+        """
+        Retrieve upcoming contests that are within a specified time delta from now.
+        """
+        contests: List[Contest] = []
+        for contest in self._upcoming_contests():
+            timediff = contest.start_time - datetime.now().astimezone(timezone.utc)
+            if (timediff <= timedelta(hours=timedelta_hours)) and (
+                contest.short_name not in self._resolved_upcoming_contest_names
+            ):
+                contests.append(contest)
+                self._resolved_upcoming_contest_names.append(contest.short_name)
+        return contests
+
     # get new contests after the previous session
     def new_contests(self) -> List[Contest]:
-        # all_contests = self._active_contests() + self._upcoming_contests()
         # Create jobs for active contests only to reduce the complexity of job scheduling.
         active_contests = self._active_contests()
         new_cnts = []
         for active_contest in active_contests:
-            if active_contest not in self._contests:
+            if active_contest.short_name not in self._contest_names:
                 new_cnts.append(active_contest)
-                self._contests.append(active_contest)
+                self._contest_names.append(active_contest.short_name)
         return new_cnts
 
     def _get_contests(

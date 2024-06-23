@@ -5,7 +5,7 @@ import threading
 from os import path
 from datetime import datetime
 
-from jobs import create_jobs_from_active_contests
+from jobs import create_jobs_from_contests_list
 
 app = Flask(__name__)
 
@@ -32,7 +32,7 @@ def index():
 
 
 if __name__ == "__main__":
-    schedule.every(2).minutes.do(create_jobs_from_active_contests)
+    schedule.every(2).minutes.do(create_jobs_from_contests_list)
     scheduler_thread = threading.Thread(target=run_scheduler)
     scheduler_thread.start()
     app.run()

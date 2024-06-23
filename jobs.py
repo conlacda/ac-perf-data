@@ -10,18 +10,19 @@ from logger import logger
 from performance import (
     dump_rounded_perf_history_all_participants,
     dump_rank_to_perf,
+    fetch_perf,
     get_avg_inner_perf_all_participants,
     update_rated_participants_perf,
 )
 
 
-def create_jobs_from_active_contests():
+def create_jobs_from_contests_list():
     contest_manager = ContestManager()
-    contests: List[Contest] = contest_manager.new_contests()
-    logger.info(f"There are {len(contests)} new active contests")
-    for contest in contests:
+    active_contests: List[Contest] = contest_manager.new_contests()
+    logger.info(f"There are {len(active_contests)} new active contests")
+    for contest in active_contests:
         if not contest.is_rated:
-            pass
+            continue
 
         schedule.every(30).seconds.do(dump_contest_type, contest=contest)
         # Update the participants's performance after the contest has finished
@@ -45,6 +46,18 @@ def create_jobs_from_active_contests():
             # Because Atcoder extends the 5-minute registration
             schedule.every(5).minutes.do(generate_data_algo_contest, contest=contest)
 
+    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=1)
+    # Get the performance history of participants 1 hour before the contest starts
+    logger.info(f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}")
+    for contest in upcoming_contests:
+        if not contest.is_rated:
+            continue
+
+        schedule.every().second.do(fetch_perf_participants, contest=contest)
+
+def fetch_perf_participants(contest: Contest) -> schedule.CancelJob:
+    fetch_perf(contest)
+    return schedule.CancelJob
 
 def dump_aperf_of_heuristic_participants(contest: Contest):
     """
@@ -66,7 +79,9 @@ def dump_rounded_perf_of_all_into_a_file(contest: Contest):
     logger.info(
         f"Creating {ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(contest.short_name)} file"
     )
-    print(f"Dump the competition history of all participants in {contest.short_name} to a file")
+    print(
+        f"Dump the competition history of all participants in {contest.short_name} to a file"
+    )
     dump_rounded_perf_history_all_participants(contest)
     return schedule.CancelJob
 
@@ -84,7 +99,7 @@ def generate_data_algo_contest(contest: Contest) -> None | schedule.CancelJob:
     commit_to_github(f"Calculate the prediction data for {contest.short_name}")
     return schedule.CancelJob
 
-# TODO: update not only the InnerPerformane, but Performance as well
+
 def update_users_perf_based_on_final_result(
     contest: Contest,
 ) -> None | schedule.CancelJob:
@@ -93,7 +108,9 @@ def update_users_perf_based_on_final_result(
     """
     if contest.hasFixedResult():
         update_rated_participants_perf(contest)
-        commit_to_github(f"Update the performance of all participants - contest {contest.short_name}")
+        commit_to_github(
+            f"Update the performance of all participants - contest {contest.short_name}"
+        )
         return schedule.CancelJob
 
 
@@ -111,7 +128,7 @@ def dump_contest_type(contest: Contest) -> None:
 
 
 if __name__ == "__main__":
-    schedule.every(2).minutes.do(create_jobs_from_active_contests)
+    schedule.every(2).minutes.do(create_jobs_from_contests_list)
     while True:
         schedule.run_pending()
         time.sleep(1)

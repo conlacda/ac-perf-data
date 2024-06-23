@@ -106,6 +106,14 @@ def update_rated_participants_perf(contest: Contest) -> None:
                 dump_perf_history(username, perfs, contest.type)
 
 
+def fetch_perf(contest: Contest) -> None:
+    participants: List[str] = contest.get_participants(only_rated=True)
+    logger.info(f"Get the performance history of {len(participants)} users - contest {contest.short_name}")
+    for participant in tqdm(participants):
+        if not path.exists(f"competition-history/{contest.type}/{participant}.json"):
+            perfs: dict[str, List[int]] = fetch_user_perf(participant, contest.type)
+            dump_perf_history(participant, perfs, contest.type)
+
 def get_avg_inner_perf_all_participants(contest: Contest) -> List[float]:
     """
     Get the participants of contest.
