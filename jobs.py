@@ -42,22 +42,31 @@ def create_jobs_from_contests_list():
             )
 
         elif contest.type == "algo":
-            # Update aperf after the contest has started 5 minutes
-            # Because Atcoder extends the 5-minute registration
-            schedule.every(5).minutes.do(generate_data_algo_contest, contest=contest)
+            # Update aperf every 5 minutes until the contest ends
+            schedule.every(5).minutes.until(timedelta(seconds=contest.duration)).do(
+                generate_data_algo_contest, contest=contest
+            )
 
-    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=1)
+    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(
+        timedelta_hours=1
+    )
     # Get the performance history of participants 1 hour before the contest starts
-    logger.info(f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}")
+    logger.info(
+        f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}"
+    )
     for contest in upcoming_contests:
         if not contest.is_rated:
             continue
 
         schedule.every().second.do(fetch_perf_participants, contest=contest)
 
+    logger.info(f"{len(schedule.get_jobs())} jobs are waiting to be executed.")
+
+
 def fetch_perf_participants(contest: Contest) -> schedule.CancelJob:
     fetch_perf(contest)
     return schedule.CancelJob
+
 
 def dump_aperf_of_heuristic_participants(contest: Contest):
     """
@@ -86,7 +95,7 @@ def dump_rounded_perf_of_all_into_a_file(contest: Contest):
     return schedule.CancelJob
 
 
-def generate_data_algo_contest(contest: Contest) -> None | schedule.CancelJob:
+def generate_data_algo_contest(contest: Contest) -> None:
     """
     Generate the average array of all participants (InnerPerformance)
     Calculate the performance array based on rank in contest
@@ -97,7 +106,6 @@ def generate_data_algo_contest(contest: Contest) -> None | schedule.CancelJob:
     dump_rank_to_perf(contest, aperfs)
     dump_rounded_perf_of_all_into_a_file(contest)
     commit_to_github(f"Calculate the prediction data for {contest.short_name}")
-    return schedule.CancelJob
 
 
 def update_users_perf_based_on_final_result(
