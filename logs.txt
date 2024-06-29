@@ -347,3 +347,70 @@
 2024-06-29 16:54:11,384 - INFO - 4888 rated users joined arc180 from performance.py line 125
 2024-06-29 16:54:15,967 - INFO - Calculating the performance table of contest arc180 from performance.py line 154
 2024-06-29 16:56:35,082 - INFO - Creating data/arc180_rounded_perf_history.json file from jobs.py line 88
+2024-06-29 16:56:50,598 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 16:56:51,583 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 16:56:51,584 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:13:24,762 - INFO - fetch() raise an exception '('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))'. Retries 1 times from fetch.py line 85
+2024-06-29 17:13:29,423 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:13:30,377 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:13:30,377 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:15:31,348 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:15:32,288 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:15:32,289 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:17:33,367 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:17:34,295 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:17:34,295 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:19:35,427 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:19:36,376 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:19:36,377 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:21:37,334 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:21:38,296 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:21:38,296 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:23:39,295 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:23:40,255 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:23:40,257 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:25:41,352 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:25:42,278 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:25:42,279 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:27:43,276 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:27:44,225 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:27:44,226 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:29:45,193 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:29:46,160 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:29:46,161 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:31:47,171 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:31:48,117 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:31:48,117 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:33:59,564 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:34:00,690 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:34:00,690 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:36:01,727 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:36:02,669 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:36:02,670 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:38:03,636 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:38:04,571 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:38:04,572 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:40:05,561 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:40:06,543 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:40:06,543 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:42:07,523 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:42:08,491 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:42:08,491 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:44:09,549 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:44:10,509 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:44:10,509 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:46:11,535 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:46:12,494 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:46:12,494 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:48:13,580 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:48:14,520 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:48:14,520 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:50:15,495 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:50:16,647 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:50:16,647 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:52:17,663 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:52:18,609 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:52:18,609 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
+2024-06-29 17:54:19,696 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-29 17:54:20,643 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-29 17:54:20,644 - INFO - 2 jobs are waiting to be executed. from jobs.py line 63
