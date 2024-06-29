@@ -48,3 +48,6 @@
 2024-06-29 21:07:29,067 - INFO - Creating data/arc180_rounded_perf_history.json file from jobs.py line 79
 2024-06-29 21:07:32,280 - INFO - There are 0 new active contests from jobs.py line 22
 2024-06-29 21:07:32,952 - INFO - 0 upcoming contest(s) - [] from jobs.py line 51
+2024-06-29 21:09:01,418 - INFO - Logged in! from fetch.py line 65
+2024-06-29 21:11:02,202 - INFO - There are 1 new active contests from jobs.py line 22
+2024-06-29 21:11:02,867 - INFO - 0 upcoming contest(s) - [] from jobs.py line 51
