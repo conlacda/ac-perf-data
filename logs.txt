@@ -1027,3 +1027,16 @@
 2024-06-30 13:39:48,692 - INFO - 8113 rated users joined abc360 from performance.py line 142
 2024-06-30 13:39:53,077 - INFO - Calculating the performance table of contest abc360 from performance.py line 171
 2024-06-30 13:50:26,986 - INFO - Creating data/abc360_rounded_perf_history.json file from jobs.py line 89
+2024-06-30 13:50:49,069 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-30 13:50:49,995 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-30 13:50:49,997 - INFO - Current jobs list: [Every 2 minutes do create_jobs_from_contests_list() (last run: 2024-06-30 13:38:52, next run: 2024-06-30 13:40:52), Every 3 hours do update_users_perf_based_on_final_result(contest=<contest.Contest object at 0x75077710>) (last run: [never], next run: 2024-06-30 16:00:45), Every 5 minutes do generate_data_algo_contest(contest=<contest.Contest object at 0x75077710>) (last run: 2024-06-30 13:50:47, next run: 2024-06-30 13:55:47)] from jobs.py line 64
+2024-06-30 13:52:50,962 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-30 13:52:51,919 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-30 13:52:51,920 - INFO - Current jobs list: [Every 2 minutes do create_jobs_from_contests_list() (last run: 2024-06-30 13:50:49, next run: 2024-06-30 13:52:49), Every 3 hours do update_users_perf_based_on_final_result(contest=<contest.Contest object at 0x75077710>) (last run: [never], next run: 2024-06-30 16:00:45), Every 5 minutes do generate_data_algo_contest(contest=<contest.Contest object at 0x75077710>) (last run: 2024-06-30 13:50:47, next run: 2024-06-30 13:55:47)] from jobs.py line 64
+2024-06-30 13:54:52,918 - INFO - There are 0 new active contests from jobs.py line 22
+2024-06-30 13:54:53,886 - INFO - 0 upcoming contest(s) - [] from jobs.py line 54
+2024-06-30 13:54:53,887 - INFO - Current jobs list: [Every 2 minutes do create_jobs_from_contests_list() (last run: 2024-06-30 13:52:51, next run: 2024-06-30 13:54:51), Every 3 hours do update_users_perf_based_on_final_result(contest=<contest.Contest object at 0x75077710>) (last run: [never], next run: 2024-06-30 16:00:45), Every 5 minutes do generate_data_algo_contest(contest=<contest.Contest object at 0x75077710>) (last run: 2024-06-30 13:50:47, next run: 2024-06-30 13:55:47)] from jobs.py line 64
+2024-06-30 13:55:47,899 - INFO - Generating data/abc360_avg_perf.json file from jobs.py line 105
+2024-06-30 13:55:50,056 - INFO - 8113 rated users joined abc360 from performance.py line 142
+2024-06-30 13:55:57,942 - INFO - Calculating the performance table of contest abc360 from performance.py line 171
+2024-06-30 14:06:31,985 - INFO - Creating data/abc360_rounded_perf_history.json file from jobs.py line 89
