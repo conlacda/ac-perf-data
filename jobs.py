@@ -60,7 +60,8 @@ def create_jobs_from_contests_list():
 
         schedule.every().second.do(fetch_perf_participants, contest=contest)
 
-    logger.info(f"{len(schedule.get_jobs())} jobs are waiting to be executed.")
+    # logger.info(f"{len(schedule.get_jobs())} jobs are waiting to be executed.")
+    logger.info(f"Current jobs list: {schedule.get_jobs()}")
 
 
 def fetch_perf_participants(contest: Contest) -> schedule.CancelJob:

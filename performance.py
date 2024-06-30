@@ -16,7 +16,9 @@ from logger import logger
 import math
 
 
-def load_saved_rounded_innner_perf(username: str, contest_type: CONTEST_TYPE) -> dict[str, List[int]]:
+def load_saved_rounded_innner_perf(
+    username: str, contest_type: CONTEST_TYPE
+) -> dict[str, List[int]]:
     """
     Load the perf of user.
     @return dict {
@@ -28,18 +30,26 @@ def load_saved_rounded_innner_perf(username: str, contest_type: CONTEST_TYPE) ->
         return json.load(f)
 
 
-def dump_avg_innerperformance_all_participants(data: dict[str, (int | float)], contest: Contest) -> None:
+def dump_avg_innerperformance_all_participants(
+    data: dict[str, (int | float)], contest: Contest
+) -> None:
     with open(AVG_PERF_DUMP[contest.type].format(contest.short_name), "w") as f:
         json.dump(data, f, indent=4)
+
 
 # This function is only for the heuristic contests.
 # Because to calculate rating of an user in the heuristic contests we need all competition history
 # not last as the algo contests
-def dump_participants_competition_history(data: dict[str, List[int]], contest: Contest) -> None:
-    with open(ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(contest.short_name), "w") as f:
+def dump_participants_competition_history(
+    data: dict[str, List[int]], contest: Contest
+) -> None:
+    with open(
+        ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(contest.short_name), "w"
+    ) as f:
         json.dump(data, f)
 
-def avg_inner_performance_of_user(username: str, contest: Contest) -> (int | float):
+
+def avg_inner_performance_of_user(username: str, contest: Contest) -> int | float:
     perf: dict[str, List[int]] = load_saved_rounded_innner_perf(username, contest.type)
     perf_arr = perf["InnerPerformance"]
     if len(perf_arr) == 0:
@@ -74,7 +84,9 @@ def fetch_user_perf(username: str, contest_type: CONTEST_TYPE) -> dict[str, List
 
 
 def dump_perf_history(
-    username: str, rounded_and_inner_perf: dict[str, List[int]], contest_type: CONTEST_TYPE
+    username: str,
+    rounded_and_inner_perf: dict[str, List[int]],
+    contest_type: CONTEST_TYPE,
 ) -> None:
     with open(f"competition-history/{contest_type}/{username}.json", "w") as json_file:
         json.dump(rounded_and_inner_perf, json_file)
@@ -99,20 +111,25 @@ def update_rated_participants_perf(contest: Contest) -> None:
                 perfs = fetch_user_perf(username, contest.type)
                 dump_perf_history(username, perfs, contest.type)
             else:
-                perfs: dict[str, List[int]] = load_saved_rounded_innner_perf(username, contest.type)
+                perfs: dict[str, List[int]] = load_saved_rounded_innner_perf(
+                    username, contest.type
+                )
                 # perfs.append(rounded_performance)
-                perfs['InnerPerformance'].append(inner_performance)
-                perfs['RoundedPerformance'].append(rounded_performance)
+                perfs["InnerPerformance"].append(inner_performance)
+                perfs["RoundedPerformance"].append(rounded_performance)
                 dump_perf_history(username, perfs, contest.type)
 
 
 def fetch_perf(contest: Contest) -> None:
     participants: List[str] = contest.get_participants(only_rated=True)
-    logger.info(f"Get the performance history of {len(participants)} users - contest {contest.short_name}")
+    logger.info(
+        f"Get the performance history of {len(participants)} users - contest {contest.short_name}"
+    )
     for participant in tqdm(participants):
         if not path.exists(f"competition-history/{contest.type}/{participant}.json"):
             perfs: dict[str, List[int]] = fetch_user_perf(participant, contest.type)
             dump_perf_history(participant, perfs, contest.type)
+
 
 def get_avg_inner_perf_all_participants(contest: Contest) -> List[float]:
     """
@@ -154,39 +171,33 @@ def dump_rank_to_perf(contest: Contest, avg_innerperf: List[float]) -> None:
     logger.info(f"Calculating the performance table of contest {contest.short_name}")
     perf_during_contest: List[int] = [] * len(avg_innerperf)
     n = len(avg_innerperf)
-    print(f"Calculate performance based on rank in contest {contest.short_name} (binary search) - dump to {PERF_BY_RANKING[contest.type].format(contest.short_name)}")
+    print(
+        f"Calculate performance based on rank in contest {contest.short_name} (binary search) - dump to {PERF_BY_RANKING[contest.type].format(contest.short_name)}"
+    )
 
     def perf2Rank(perf):
         ans = 0
         for aperf in avg_innerperf:
             ans += 1 / (1 + pow(6.0, (perf - aperf) / 400.0))
         ans += 0.5
-        return math.ceil(ans)
+        return ans
 
-    prev_left = -5000
-    prev_right = 7000
-    for i in tqdm(range(n)):
-        r = i + 1
-        left = prev_left
-        right = prev_right
-        while left < right:
-            mid = (left + right) // 2
+    # Rank of the top users will be rounded down to contest.max_perf
+    # So they have the same performance of contest.max_perf
+    top_rank = math.floor(perf2Rank(contest.max_perf))
+    for i in range(1, top_rank + 1):
+        perf_during_contest.append(contest.max_perf)
 
-            if perf2Rank(mid) <= r:
-                right = mid
-            else:
-                left = mid + 1
+    # Calculate rating for the rest
+    cur_rating = contest.max_perf
+    for rank in tqdm(range(top_rank + 1, n + 1)):
+        while perf2Rank(cur_rating) < rank:
+            cur_rating -= 1
 
-        assert left == right
-        while perf2Rank(left) < r:
-            left -= 1
-
-        perf_during_contest.append(min(left, contest.max_perf))
-        # Instead calculate perf(r) with left = -5000 and right = 7000 one more time
-        # Notice that perf(r) and perf(r+1) pretty close (perf(r) - perf(r+1) < 50)
-        # So we just need to do binary search in (perf(r)-50, perf(r)) to find perf(r+1)
-        prev_left = left
-        prev_right = left
+        diff1 = abs(perf2Rank(cur_rating) - rank)
+        diff2 = abs(perf2Rank(cur_rating + 1) - rank)
+        nearer_rank = cur_rating if (diff1 < diff2) else cur_rating + 1
+        perf_during_contest.append(nearer_rank)
 
     # Dump to file
     with open(PERF_BY_RANKING[contest.type].format(contest.short_name), "w") as f:
@@ -209,6 +220,6 @@ def dump_rounded_perf_history_all_participants(contest: Contest) -> None:
             dump_perf_history(participant, perfs, contest.type)
 
         perfs = load_saved_rounded_innner_perf(participant, contest.type)
-        data[participant] = perfs.get('RoundedPerformance')
+        data[participant] = perfs.get("RoundedPerformance")
 
     dump_participants_competition_history(data, contest)
