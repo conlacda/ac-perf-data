@@ -42,7 +42,10 @@ def create_jobs_from_contests_list():
             )
 
         elif contest.type == "algo":
-            # Update aperf every 5 minutes until the contest ends
+            """
+            Update aperf every 5 minutes until the contest ends from now.
+            """
+            generate_data_algo_contest(contest) # run intermediately
             schedule.every(5).minutes.until(timedelta(seconds=contest.duration)).do(
                 generate_data_algo_contest, contest=contest
             )
