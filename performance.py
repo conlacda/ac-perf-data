@@ -14,6 +14,7 @@ from fetch import fetch
 from tqdm import tqdm
 from logger import logger
 import math
+from functools import cache
 
 
 def load_saved_rounded_innner_perf(
@@ -169,12 +170,13 @@ def dump_rank_to_perf(contest: Contest, avg_innerperf: List[float]) -> None:
     """
     # Calculate performance for each ranking
     logger.info(f"Calculating the performance table of contest {contest.short_name}")
-    perf_during_contest: List[int] = [] * len(avg_innerperf)
+    perf_during_contest: List[int] = []
     n = len(avg_innerperf)
     print(
         f"Calculate performance based on rank in contest {contest.short_name} (binary search) - dump to {PERF_BY_RANKING[contest.type].format(contest.short_name)}"
     )
 
+    @cache
     def perf2Rank(perf):
         ans = 0
         for aperf in avg_innerperf:
@@ -189,15 +191,15 @@ def dump_rank_to_perf(contest: Contest, avg_innerperf: List[float]) -> None:
         perf_during_contest.append(contest.max_perf)
 
     # Calculate rating for the rest
-    cur_rating = contest.max_perf
+    cur_perf = contest.max_perf
     for rank in tqdm(range(top_rank + 1, n + 1)):
-        while perf2Rank(cur_rating) < rank:
-            cur_rating -= 1
+        while perf2Rank(cur_perf) < rank:
+            cur_perf -= 1
 
-        diff1 = abs(perf2Rank(cur_rating) - rank)
-        diff2 = abs(perf2Rank(cur_rating + 1) - rank)
-        nearer_rank = cur_rating if (diff1 < diff2) else cur_rating + 1
-        perf_during_contest.append(nearer_rank)
+        diff1 = abs(perf2Rank(cur_perf) - rank)
+        diff2 = abs(perf2Rank(cur_perf + 1) - rank)
+        nearer_perf = cur_perf if (diff1 < diff2) else cur_perf + 1
+        perf_during_contest.append(nearer_perf)
 
     # Dump to file
     with open(PERF_BY_RANKING[contest.type].format(contest.short_name), "w") as f:
