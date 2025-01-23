@@ -1,0 +1,497 @@
+[
+    {
+        "type": "heuristic",
+        "start_time": "2025-01-19 06:00:00",
+        "short_name": "ahc041",
+        "duration": 14400,
+        "link": "/contests/ahc041",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-11-29 10:00:00",
+        "short_name": "ahc040",
+        "duration": 864000,
+        "link": "/contests/ahc040",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-11-10 06:00:00",
+        "short_name": "ahc039",
+        "duration": 14400,
+        "link": "/contests/ahc039",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-10-04 10:00:00",
+        "short_name": "ahc038",
+        "duration": 864000,
+        "link": "/contests/ahc038",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-09-15 10:00:00",
+        "short_name": "ahc037",
+        "duration": 14400,
+        "link": "/contests/ahc037",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-08-23 10:00:00",
+        "short_name": "ahc036",
+        "duration": 864000,
+        "link": "/contests/ahc036",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-07-21 06:00:00",
+        "short_name": "ahc035",
+        "duration": 14400,
+        "link": "/contests/ahc035",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-06-16 06:00:00",
+        "short_name": "ahc034",
+        "duration": 14400,
+        "link": "/contests/ahc034",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-05-17 10:00:00",
+        "short_name": "ahc033",
+        "duration": 864000,
+        "link": "/contests/ahc033",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-04-07 10:00:00",
+        "short_name": "ahc032",
+        "duration": 14400,
+        "link": "/contests/ahc032",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-03-22 10:00:00",
+        "short_name": "ahc031",
+        "duration": 864000,
+        "link": "/contests/ahc031",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-03-03 04:00:00",
+        "short_name": "masters-qual",
+        "duration": 21600,
+        "link": "/contests/masters-qual",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-02-09 10:00:00",
+        "short_name": "ahc030",
+        "duration": 864000,
+        "link": "/contests/ahc030",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2024-01-13 06:00:00",
+        "short_name": "ahc028",
+        "duration": 14400,
+        "link": "/contests/ahc028",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-12-22 03:00:00",
+        "short_name": "ahc029",
+        "duration": 378000,
+        "link": "/contests/ahc029",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-12-01 10:00:00",
+        "short_name": "ahc027",
+        "duration": 777600,
+        "link": "/contests/ahc027",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-11-05 06:00:00",
+        "short_name": "ahc026",
+        "duration": 14400,
+        "link": "/contests/ahc026",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-10-14 03:00:00",
+        "short_name": "ahc025",
+        "duration": 716400,
+        "link": "/contests/ahc025",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-09-24 06:00:00",
+        "short_name": "ahc024",
+        "duration": 14400,
+        "link": "/contests/ahc024",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-09-03 01:00:00",
+        "short_name": "ahc023",
+        "duration": 640800,
+        "link": "/contests/ahc023",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-08-27 01:15:00",
+        "short_name": "toyota2023summer-final-open",
+        "duration": 12600,
+        "link": "/contests/toyota2023summer-final-open",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-08-27 01:15:00",
+        "short_name": "toyota2023summer-final",
+        "duration": 12600,
+        "link": "/contests/toyota2023summer-final",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-08-11 03:00:00",
+        "short_name": "ahc022",
+        "duration": 802800,
+        "link": "/contests/ahc022",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-06-25 06:00:00",
+        "short_name": "ahc021",
+        "duration": 14400,
+        "link": "/contests/ahc021",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-06-11 06:00:00",
+        "short_name": "ahc020",
+        "duration": 14400,
+        "link": "/contests/ahc020",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-03-18 03:00:00",
+        "short_name": "ahc019",
+        "duration": 1321200,
+        "link": "/contests/ahc019",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-02-18 03:00:00",
+        "short_name": "ahc018",
+        "duration": 716400,
+        "link": "/contests/ahc018",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2023-01-28 03:00:00",
+        "short_name": "ahc017",
+        "duration": 720000,
+        "link": "/contests/ahc017",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-12-22 15:00:00",
+        "short_name": "hokudai-hitachi2022",
+        "duration": 2678340,
+        "link": "/contests/hokudai-hitachi2022",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-12-10 01:30:00",
+        "short_name": "future-contest-2023-final-open",
+        "duration": 28800,
+        "link": "/contests/future-contest-2023-final-open",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-11-11 10:00:00",
+        "short_name": "ahc016",
+        "duration": 777600,
+        "link": "/contests/ahc016",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-10-30 06:00:00",
+        "short_name": "ahc015",
+        "duration": 14400,
+        "link": "/contests/ahc015",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-09-17 06:00:00",
+        "short_name": "ahc014",
+        "duration": 1224000,
+        "link": "/contests/ahc014",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-08-28 01:00:00",
+        "short_name": "asprocon9",
+        "duration": 640800,
+        "link": "/contests/asprocon9",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-08-09 12:00:00",
+        "short_name": "ahc013",
+        "duration": 604800,
+        "link": "/contests/ahc013",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-07-03 06:00:00",
+        "short_name": "ahc012",
+        "duration": 14400,
+        "link": "/contests/ahc012",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-05-28 03:00:00",
+        "short_name": "ahc011",
+        "duration": 716400,
+        "link": "/contests/ahc011",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-04-24 06:00:00",
+        "short_name": "ahc010",
+        "duration": 14400,
+        "link": "/contests/ahc010",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-03-26 06:00:00",
+        "short_name": "ahc009",
+        "duration": 14400,
+        "link": "/contests/ahc009",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-03-06 01:00:00",
+        "short_name": "asprocon8",
+        "duration": 640800,
+        "link": "/contests/asprocon8",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2022-02-12 03:00:00",
+        "short_name": "ahc008",
+        "duration": 1234800,
+        "link": "/contests/ahc008",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-12-18 01:30:00",
+        "short_name": "future-contest-2022-final-open",
+        "duration": 28800,
+        "link": "/contests/future-contest-2022-final-open",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-12-12 07:00:00",
+        "short_name": "ahc007",
+        "duration": 14400,
+        "link": "/contests/ahc007",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-11-14 07:00:00",
+        "short_name": "ahc006",
+        "duration": 14400,
+        "link": "/contests/ahc006",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-11-12 15:00:00",
+        "short_name": "hokudai-hitachi2021",
+        "duration": 6911940,
+        "link": "/contests/hokudai-hitachi2021",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-11-03 10:00:00",
+        "short_name": "future-contest-2022-qual",
+        "duration": 864000,
+        "link": "/contests/future-contest-2022-qual",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-09-05 09:00:00",
+        "short_name": "rcl-contest-2021-long",
+        "duration": 604800,
+        "link": "/contests/rcl-contest-2021-long",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-08-07 07:00:00",
+        "short_name": "ahc005",
+        "duration": 14400,
+        "link": "/contests/ahc005",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-06-26 04:00:00",
+        "short_name": "ahc004",
+        "duration": 21600,
+        "link": "/contests/ahc004",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-05-22 03:00:00",
+        "short_name": "ahc003",
+        "duration": 720000,
+        "link": "/contests/ahc003",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-04-25 10:00:00",
+        "short_name": "ahc002",
+        "duration": 14400,
+        "link": "/contests/ahc002",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2021-03-06 03:00:00",
+        "short_name": "ahc001",
+        "duration": 720000,
+        "link": "/contests/ahc001",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2020-12-16 15:00:00",
+        "short_name": "hokudai-hitachi2020",
+        "duration": 2678340,
+        "link": "/contests/hokudai-hitachi2020",
+        "is_short": false,
+        "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2020-06-28 12:00:00",
+        "short_name": "intro-heuristics",
+        "duration": 7200,
+        "link": "/contests/intro-heuristics",
+        "is_short": true,
+        "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2019-11-07 15:00:00",
+        "short_name": "hokudai-hitachi2019-1",
+        "duration": 1209540,
+        "link": "/contests/hokudai-hitachi2019-1",
+        "is_short": false,
+        "weight": 1
+    }
+]
