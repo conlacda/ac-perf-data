@@ -24,7 +24,7 @@
         "duration": 14400,
         "link": "/contests/ahc039",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -42,7 +42,7 @@
         "duration": 14400,
         "link": "/contests/ahc037",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -60,7 +60,7 @@
         "duration": 14400,
         "link": "/contests/ahc035",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -69,7 +69,7 @@
         "duration": 14400,
         "link": "/contests/ahc034",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -87,7 +87,7 @@
         "duration": 14400,
         "link": "/contests/ahc032",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -105,7 +105,7 @@
         "duration": 21600,
         "link": "/contests/masters-qual",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -123,7 +123,7 @@
         "duration": 14400,
         "link": "/contests/ahc028",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -150,7 +150,7 @@
         "duration": 14400,
         "link": "/contests/ahc026",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -168,7 +168,7 @@
         "duration": 14400,
         "link": "/contests/ahc024",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -186,7 +186,7 @@
         "duration": 12600,
         "link": "/contests/toyota2023summer-final-open",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -195,7 +195,7 @@
         "duration": 12600,
         "link": "/contests/toyota2023summer-final",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -213,7 +213,7 @@
         "duration": 14400,
         "link": "/contests/ahc021",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -222,7 +222,7 @@
         "duration": 14400,
         "link": "/contests/ahc020",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -267,7 +267,7 @@
         "duration": 28800,
         "link": "/contests/future-contest-2023-final-open",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -285,7 +285,7 @@
         "duration": 14400,
         "link": "/contests/ahc015",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -321,7 +321,7 @@
         "duration": 14400,
         "link": "/contests/ahc012",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -339,7 +339,7 @@
         "duration": 14400,
         "link": "/contests/ahc010",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -348,7 +348,7 @@
         "duration": 14400,
         "link": "/contests/ahc009",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -375,7 +375,7 @@
         "duration": 28800,
         "link": "/contests/future-contest-2022-final-open",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -384,7 +384,7 @@
         "duration": 14400,
         "link": "/contests/ahc007",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -393,7 +393,7 @@
         "duration": 14400,
         "link": "/contests/ahc006",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -429,7 +429,7 @@
         "duration": 14400,
         "link": "/contests/ahc005",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -438,7 +438,7 @@
         "duration": 21600,
         "link": "/contests/ahc004",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -456,7 +456,7 @@
         "duration": 14400,
         "link": "/contests/ahc002",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
@@ -483,7 +483,7 @@
         "duration": 7200,
         "link": "/contests/intro-heuristics",
         "is_short": true,
-        "weight": 0.5
+        "weight": 1
     },
     {
         "type": "heuristic",
