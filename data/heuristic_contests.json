@@ -493,5 +493,14 @@
         "link": "/contests/hokudai-hitachi2019-1",
         "is_short": false,
         "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2025-02-02 10:00:00",
+        "short_name": "ahc042",
+        "duration": 14400,
+        "link": "/contests/ahc042",
+        "is_short": true,
+        "weight": 0.5
     }
 ]
