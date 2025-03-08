@@ -511,5 +511,14 @@
         "link": "/contests/ahc043",
         "is_short": false,
         "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2025-03-02 04:00:00",
+        "short_name": "masters2025-qual",
+        "duration": 21600,
+        "link": "/contests/masters2025-qual",
+        "is_short": true,
+        "weight": 0.5
     }
 ]
