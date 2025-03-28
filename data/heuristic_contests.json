@@ -529,5 +529,14 @@
         "link": "/contests/ahc044",
         "is_short": true,
         "weight": 0.5
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2025-03-28 10:00:00",
+        "short_name": "ahc045",
+        "duration": 864000,
+        "link": "/contests/ahc045",
+        "is_short": false,
+        "weight": 1
     }
 ]
