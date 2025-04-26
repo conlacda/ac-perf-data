@@ -42,8 +42,8 @@ cache = dict()  # cache['url'] = {'data': ..., 'timestamp': ...}
 
 def fetch_login(
     url: str,
-    retry: int = 15,
-    sleep_time_after_failing: int = 20,  # seconds
+    retry: int = 20,
+    sleep_time_after_failing: int = 8,  # seconds
 ):
     # Check if cache hits
     if cache.get(url) and time.time() - cache[url]["timestamp"] < 5 * 60:
