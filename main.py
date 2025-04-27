@@ -24,19 +24,19 @@ def create_jobs_from_contests_list():
             ).do(generate_performance_files, contest=contest)
 
         elif contest.type == "algo":
-            # Update aperf every 5 minutes until the contest ends from now.
-            schedule.every(5).minutes.until(
+            # Update aperf every 3 minutes until the contest ends from now.
+            schedule.every(3).minutes.until(
                 timedelta(seconds=contest.duration) # contest.start_time + timedelta(seconds=contest.duration)
             ).do(generate_performance_files, contest=contest)
 
-    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=24)
+    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=4)
     # Get the performance history of participants 1 hour before the contest starts
     print(f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}")
     for contest in upcoming_contests:
         if not contest.is_rated:
             continue
 
-        schedule.every(15).minutes.until(timedelta(minutes=24*60)).do(
+        schedule.every(5).minutes.until(timedelta(minutes=4*60)).do(
             generate_performance_files, contest=contest, commit=False
         )
 
