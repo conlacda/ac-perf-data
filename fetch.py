@@ -6,13 +6,20 @@ from seleniumbase import SB
 from os import getenv
 from bs4 import BeautifulSoup
 import json
+import threading
+import queue
+import sys
 from sbvirtualdisplay import Display
 
 session = requests.Session()
 load_dotenv()
+q = queue.Queue()
 
 
-def fetch_no_login(
+# Hàm fetch này sử dụng request để fetch
+# Sử dụng cho các url ko cần xác minh captcha
+# Với url cần xác minh captcha, sử dụng hàm bên dưới
+def fetch(
     url: str,
     output_format: Literal["json", "text"] = "json",
     retry: int = 10,
@@ -31,51 +38,63 @@ def fetch_no_login(
                 )
         except Exception as e:
             retry_count += 1
-            print(
-                f"fetch_no_login() raise an exception '{e}'. Retries {retry_count} times"
-            )
+            print(f"fetch() raise an exception '{e}'. Retries {retry_count} times")
             time.sleep(sleep_time_after_failing * int(pow(2, retry_count)))
 
 
-cache = dict()  # cache['url'] = {'data': ..., 'timestamp': ...}
+fetchedData = dict()  # fetchedData['url'] = {'data': ..., 'timestamp': ...}
 
 
-def fetch_login(
-    url: str,
-    retry: int = 20,
-    sleep_time_after_failing: int = 8,  # seconds
-):
-    # Check if cache hits
-    if cache.get(url) and time.time() - cache[url]["timestamp"] < 5 * 60:
-        return cache[url]["data"]
-    # Fetch
-    time.sleep(1)
-    retry_count: int = 0
+def requestForFetch(url: str):
+    q.put(url)
+
+
+def getRequestedData(url: str):
+    cnt: int = 0
+    while cnt < 10:
+        if fetchedData.get(url) and time.time() - fetchedData[url]["timestamp"] < 5 * 60:
+            return fetchedData[url]["data"]
+        time.sleep(5)
+        cnt += 1
+    return None
+
+
+def fetchWithBrowser(retry: int = 15):
     display = Display(visible=0, size=(1440, 1880))
     display.start()
-    while retry_count < retry:
-        try:
-            with SB(uc=True, locale="en") as sb:
-                sb.activate_cdp_mode("https://atcoder.jp/login")
-                sb.sleep(10)
-                sb.uc_gui_click_captcha()  # uc_gui_click_cf()
-                sb.sleep(2)
-                sb.cdp.type("#username", getenv("ATCODER_USER_NAME"))
-                sb.cdp.type("#password", getenv("ATCODER_PASSWORD"))
-                sb.cdp.click("button[id=submit]")
-                sb.sleep(5)
-                sb.cdp.open(url)
-                page_source = sb.cdp.get_page_source()
-                soup = BeautifulSoup(page_source, "html.parser")
-                pre_tag = soup.find("pre")
-                if pre_tag is None:
-                    raise ValueError("pre_tag must not be None")
-                data = json.loads(pre_tag.text)
-                # Store to cache
-                cache[url] = {"data": data, "timestamp": time.time()}
-                return data
-        except Exception as e:
-            retry_count += 1
-            time.sleep(sleep_time_after_failing)
-            print(e)
+    with SB(uc=True, locale="en") as sb:
+        for _ in range(retry):
+            sb.activate_cdp_mode("https://atcoder.jp/login")
+            sb.sleep(10)
+            sb.uc_gui_click_captcha(retry=True)
+            sb.sleep(2)
+            sb.cdp.type("#username", getenv("ATCODER_USER_NAME"))
+            sb.cdp.type("#password", getenv("ATCODER_PASSWORD"))
+            sb.cdp.click("button[id=submit]")
+            sb.sleep(5)
+            page_title = sb.get_page_title()
+            if page_title.startswith("AtCoder"):
+                print(f"Login OK ({_}/{retry}) :3")
+                break
+            else:
+                print(f"Login failed ({_}/{retry}) :(")
+                if _ == retry - 1:
+                    sys.exit("Login failed!!!")
+
+        while True:
+            requestedUrl = q.get()
+            sb.cdp.open(requestedUrl)
+            page_source = sb.cdp.get_page_source()
+            soup = BeautifulSoup(page_source, "html.parser")
+            pre_tag = soup.find("pre")
+            if pre_tag is None:
+                return None  # fetch fails
+            data = json.loads(pre_tag.text)
+            # Store to cache
+            fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
+        
     display.stop()
+
+
+fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
+fetchWithBrowserThread.start()

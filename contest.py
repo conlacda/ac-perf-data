@@ -2,11 +2,11 @@ from functools import cache
 import math
 import os
 from tqdm import tqdm
-from fetch import fetch_login, fetch_no_login
+from fetch import fetch
 from bs4 import BeautifulSoup
 from typing import List, Literal
 from datetime import datetime, timedelta, timezone
-from fetch import fetch_no_login
+from fetch import fetch
 from constants import ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY, HEURISTIC_CONTEST_LIST, PERF_BY_RANKING, RESULT_URL, STANDING_URL
 from util import commit_to_github
 from constants import CONTEST_TYPE_DUMP
@@ -53,7 +53,11 @@ class Contest:
         return self.short_name == other.short_name
 
     def get_standings(self):
-        return fetch_login(STANDING_URL.format(self.short_name))
+        from fetch import requestForFetch, getRequestedData
+        standingsUrl = STANDING_URL.format(self.short_name)
+        requestForFetch(standingsUrl)
+        return getRequestedData(standingsUrl)
+        
 
     def get_participants(self, only_rated: bool = False) -> List[str]:
         data = self.get_standings()
@@ -119,7 +123,7 @@ class Contest:
     # Cập nhật lịch sử thi đấu của toàn bộ người dùng
     def update_competition_history_if_fixed_result_available(self) -> bool:
         from user import User
-        res = fetch_no_login(RESULT_URL.format(self.short_name), "json")
+        res = fetch(RESULT_URL.format(self.short_name), "json")
         if len(res) == 0:
             return False
 
@@ -315,7 +319,7 @@ class ContestManager:
     def _get_contests(
         self, title: Literal["Active Contests", "Upcoming Contests"]
     ) -> List[Contest]:
-        source = fetch_no_login("https://atcoder.jp/contests/", "text")
+        source = fetch("https://atcoder.jp/contests/", "text")
         soup = BeautifulSoup(source, features="html.parser")
         constests_h3 = soup.find("h3", string=title)
 
@@ -384,7 +388,7 @@ class ContestManager:
     def fetch_all_heuristic_contest_list(self):
         NUMBER_OF_PAGES = 2 # tại thời điểm code thì có 2 page của heuristic contest
         for page in range(1, NUMBER_OF_PAGES + 1):
-            source = fetch_no_login(f"https://atcoder.jp/contests/archive?category=0&page={page}&ratedType=4", "text")
+            source = fetch(f"https://atcoder.jp/contests/archive?category=0&page={page}&ratedType=4", "text")
             soup = BeautifulSoup(source, features="html.parser")
             table = soup.find("table")
             rows = table.find("tbody").find_all("tr")

@@ -4,7 +4,7 @@ import os
 from typing import List, Literal
 from constants import COMPETITION_HISTORY, COMPETITION_HISTORY_URL
 from contest import Contest, ContestManager
-from fetch import fetch_no_login
+from fetch import fetch
 
 
 class User:
@@ -60,7 +60,7 @@ class User:
             'ContestShortName': ['abc123', 'agc012', ...]
         }
         """
-        data = fetch_no_login(
+        data = fetch(
             COMPETITION_HISTORY_URL[contest_type].format(self.username), "json"
         )
         result: dict[str, List[int]] = {
