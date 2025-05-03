@@ -29,14 +29,14 @@ def create_jobs_from_contests_list():
                 timedelta(seconds=contest.duration) # contest.start_time + timedelta(seconds=contest.duration)
             ).do(generate_performance_files, contest=contest)
 
-    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=4)
+    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=1)
     # Get the performance history of participants 1 hour before the contest starts
     print(f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}")
     for contest in upcoming_contests:
         if not contest.is_rated:
             continue
 
-        schedule.every(5).minutes.until(timedelta(minutes=4*60)).do(
+        schedule.every(1).minutes.until(timedelta(minutes=1*60)).do(
             generate_performance_files, contest=contest, commit=False
         )
 
@@ -68,7 +68,7 @@ def update_users_perf_based_on_final_result(
 
 
 if __name__ == "__main__":
-    schedule.every(2).minutes.do(create_jobs_from_contests_list)
+    schedule.every(1).minutes.do(create_jobs_from_contests_list)
     while True:
         schedule.run_pending()
         time.sleep(1)

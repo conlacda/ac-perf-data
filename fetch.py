@@ -25,7 +25,7 @@ def fetch(
     retry: int = 10,
     sleep_time_after_failing: int = 2,  # seconds
 ) -> Union[dict, str]:
-    time.sleep(1)
+    time.sleep(0.7)
     retry_count: int = 0
     while retry_count < retry:
         try:
@@ -60,8 +60,6 @@ def getRequestedData(url: str):
 
 
 def fetchWithBrowser(retry: int = 15):
-    display = Display(visible=0, size=(1440, 1880))
-    display.start()
     with SB(uc=True, locale="en") as sb:
         for _ in range(retry):
             sb.activate_cdp_mode("https://atcoder.jp/login")
@@ -93,8 +91,19 @@ def fetchWithBrowser(retry: int = 15):
             # Store to cache
             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
         
-    display.stop()
+# def fetchWithBrowser():
 
+#     with sync_playwright() as p:
+#         browser = p.firefox.launch(headless=False)
+#         context = browser.new_context()
+#         page = context.new_page()
+#         page.goto("https://atcoder.jp/login")
+
+#         while True:
+#             requestedUrl = q.get()
+#             response = page.goto(requestedUrl)
+#             data = response.json()
+#             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
 
 fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
 fetchWithBrowserThread.start()
