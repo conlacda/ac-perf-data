@@ -129,11 +129,10 @@ class Contest:
 
         print(f"Updating competition history of {self.short_name}")
         for item in tqdm(res):
-            user = User(item.get("UserScreenName"))
-            user.removeIfHistoryObsolete(item["Competitions"] - 1, self.type)
-            competion_history = user.competition_history(self.type)
-
             if item.get("IsRated"):
+                user = User(item.get("UserScreenName"))
+                user.removeIfHistoryObsolete(item["Competitions"] - 1, self.type)
+                competion_history = user.competition_history(self.type)
                 rounded_performance = item.get("Performance")
                 # Nếu người dùng có perf vượt quá mức giới hạn thì sẽ được làm tròn xuống
                 # Khi này phải fetch thẳng tới lịch sử thi đấu thì mới lấy được giá trị performance thực
