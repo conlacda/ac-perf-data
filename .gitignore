@@ -6,3 +6,5 @@ competition-history
 .venv
 downloaded_files
 *.py
+data/abc408_ranking_to_perf.json
+data/abc408_rounded_perf_history.json
