@@ -112,7 +112,7 @@ class User:
         }
         """
         file = COMPETITION_HISTORY.format(contest_type=contest_type, username=self.username)
-        if not os.path.exists(file) or refresh:
+        if refresh or not os.path.exists(file):
             perfs = self.fetch_competition_history(contest_type)
             self.save_performance_history(perfs, contest_type)
             return perfs

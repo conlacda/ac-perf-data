@@ -6,3 +6,4 @@ competition-history
 .venv
 downloaded_files
 *.py
+latest_logs/
