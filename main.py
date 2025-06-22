@@ -9,7 +9,7 @@ from util import commit_to_github
 def create_jobs_from_contests_list():
     contest_manager = ContestManager()
     active_contests: List[Contest] = contest_manager.new_contests()
-    print(f"There are {len(active_contests)} new active contests")
+    print(f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}")
     for contest in active_contests:
         contest.dump_contest_type()
         # Update the participants's performance after the contest has finished

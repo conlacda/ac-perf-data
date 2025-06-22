@@ -85,6 +85,7 @@ class Contest:
             "- 1999",
             "1200 - 2399",
             "1600 - 2999",
+            "1200 - 2799",
             "2000 -",
             "All",
         ]
@@ -96,6 +97,9 @@ class Contest:
             return 800
         # ARC
         if self.rate_range == "1200 - 2399" or self.rate_range == "1600 - 2999":
+            return 1000
+        # unusual ARC
+        if self.rate_range == "1200 - 2799":
             return 1000
         # AGC
         if self.rate_range == "2000 -":
@@ -113,6 +117,8 @@ class Contest:
             return 2800
         if self.rate_range == "1600 - 2999":
             return 3400
+        if self.rate_range == "1200 - 2799":
+            return 3200
         # AGC
         if self.rate_range == "2000 -":
             return 4500
