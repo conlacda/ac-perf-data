@@ -62,15 +62,20 @@ def getRequestedData(url: str):
 def fetchWithBrowser(retry: int = 15):
     with SB(uc=True, locale="en") as sb:
         for _ in range(retry):
+            print(_)
             sb.activate_cdp_mode("https://atcoder.jp/login")
             sb.sleep(10)
+            print(68)
             sb.uc_gui_click_captcha(retry=True)
             sb.sleep(2)
+            print(71)
             sb.cdp.type("#username", getenv("ATCODER_USER_NAME"))
             sb.cdp.type("#password", getenv("ATCODER_PASSWORD"))
             sb.cdp.click("button[id=submit]")
+            print(75)
             sb.sleep(5)
             page_title = sb.get_page_title()
+            print(page_title)
             if page_title.startswith("AtCoder"):
                 print(f"Login OK ({_}/{retry}) :3")
                 break
