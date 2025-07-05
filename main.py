@@ -25,7 +25,7 @@ def create_jobs_from_contests_list():
 
         elif contest.type == "algo":
             # Update aperf every 3 minutes until the contest ends from now.
-            schedule.every(3).minutes.until(
+            schedule.every(1).minutes.until(
                 timedelta(seconds=contest.duration) # contest.start_time + timedelta(seconds=contest.duration)
             ).do(generate_performance_files, contest=contest)
 
@@ -36,7 +36,7 @@ def create_jobs_from_contests_list():
         if not contest.is_rated:
             continue
 
-        schedule.every(3).minutes.until(timedelta(minutes=80)).do(
+        schedule.every(1).minutes.until(timedelta(minutes=80)).do(
             generate_performance_files, contest=contest, commit=False
         )
 
@@ -47,6 +47,7 @@ def create_jobs_from_contests_list():
 def generate_performance_files(contest: Contest, commit: bool = True) -> None:
     print(f"Generating data/{contest.short_name}_avg_perf.json file")
     aperfs = contest.get_average_inner_performance_of_all_participants()
+    print(aperfs)
     if len(aperfs) == 0:
         return
 
