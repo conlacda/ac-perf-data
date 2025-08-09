@@ -5,33 +5,46 @@ from contest import ContestManager, Contest
 from datetime import timedelta
 from util import commit_to_github
 
+
 # Tạo danh sách các job dựa vào contest hiện tại
 def create_jobs_from_contests_list():
     contest_manager = ContestManager()
     active_contests: List[Contest] = contest_manager.new_contests()
-    print(f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}")
+    print(
+        f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}"
+    )
     for contest in active_contests:
         contest.dump_contest_type()
         # Update the participants's performance after the contest has finished
-        schedule.every(3).hours.do(update_users_perf_based_on_final_result, contest=contest)
-        generate_performance_files(contest) # run intermediately
+        schedule.every(3).hours.do(
+            update_users_perf_based_on_final_result, contest=contest
+        )
+        generate_performance_files(contest)  # run intermediately
 
         if contest.type == "heuristic":
             # Update aperf every 5 minutes
             interval_in_minutes = 2 if contest.is_short_contest() else 10
             schedule.every(interval_in_minutes).minutes.until(
-                timedelta(seconds=contest.duration) # contest.start_time + timedelta(seconds=contest.duration)
+                timedelta(
+                    seconds=contest.duration
+                )  # contest.start_time + timedelta(seconds=contest.duration)
             ).do(generate_performance_files, contest=contest)
 
         elif contest.type == "algo":
             # Update aperf every n minutes until the contest ends from now.
             schedule.every(2).minutes.until(
-                timedelta(seconds=contest.duration) # contest.start_time + timedelta(seconds=contest.duration)
+                timedelta(
+                    seconds=contest.duration
+                )  # contest.start_time + timedelta(seconds=contest.duration)
             ).do(generate_performance_files, contest=contest)
 
-    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(timedelta_hours=2)
+    upcoming_contests: List[Contest] = contest_manager.upcoming_contests(
+        timedelta_hours=2
+    )
     # Get the performance history of participants 1 hour before the contest starts
-    print(f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}")
+    print(
+        f"{len(upcoming_contests)} upcoming contest(s) - {list(map(lambda ct: ct.short_name, upcoming_contests))}"
+    )
     for contest in upcoming_contests:
         if not contest.is_rated:
             continue
