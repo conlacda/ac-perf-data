@@ -38,7 +38,7 @@ def create_jobs_from_contests_list():
             ).do(generate_performance_files, contest=contest)
 
     upcoming_contests: list[Contest] = contest_manager.upcoming_contests(
-        timedelta_hours=1
+        timedelta_hours=2
     )
     # Get the performance history of participants 1 hour before the contest starts
     print(
@@ -48,7 +48,7 @@ def create_jobs_from_contests_list():
         if not contest.is_rated:
             continue
 
-        schedule.every(2).minutes.until(timedelta(minutes=60)).do(
+        schedule.every(2).minutes.until(timedelta(minutes=120)).do(
             generate_performance_files, contest=contest, commit=False
         )
 
