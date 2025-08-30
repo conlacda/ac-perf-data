@@ -6,6 +6,5 @@ schedule
 flask
 gunicorn
 seleniumbase
-xvfb
 pyautogui
 pytest-playwright
