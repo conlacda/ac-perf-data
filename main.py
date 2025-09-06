@@ -48,7 +48,7 @@ def create_jobs_from_contests_list():
         if not contest.is_rated:
             continue
 
-        schedule.every(2).minutes.until(timedelta(minutes=120)).do(
+        schedule.every(2).minutes.until(timedelta(minutes=125)).do(
             generate_performance_files, contest=contest, commit=False
         )
 
