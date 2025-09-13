@@ -8,7 +8,7 @@ from util import commit_to_github
 # Tạo danh sách các job dựa vào contest hiện tại
 def create_jobs_from_contests_list():
     contest_manager = ContestManager()
-    active_contests: List[Contest] = contest_manager.new_contests()
+    active_contests: list[Contest] = contest_manager.new_contests()
     print(
         f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}"
     )
