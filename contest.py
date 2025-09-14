@@ -6,7 +6,6 @@ from fetch import fetch
 from bs4 import BeautifulSoup
 from typing import List, Literal
 from datetime import datetime, timedelta, timezone
-from fetch import fetch
 from constants import ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY, HEURISTIC_CONTEST_LIST, PERF_BY_RANKING, RESULT_URL, STANDING_URL
 from util import commit_to_github
 from constants import CONTEST_TYPE_DUMP
