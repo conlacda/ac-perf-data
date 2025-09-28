@@ -51,7 +51,10 @@ def requestForFetch(url: str):
 def getRequestedData(url: str):
     cnt: int = 0
     while cnt < 10:
-        if fetchedData.get(url) and time.time() - fetchedData[url]["timestamp"] < 5 * 60:
+        if (
+            fetchedData.get(url)
+            and time.time() - fetchedData[url]["timestamp"] < 5 * 60
+        ):
             return fetchedData[url]["data"]
         time.sleep(5)
         cnt += 1
@@ -90,20 +93,7 @@ def fetchWithBrowser(retry: int = 15):
             data = json.loads(pre_tag.text)
             # Store to cache
             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
-        
-# def fetchWithBrowser():
 
-#     with sync_playwright() as p:
-#         browser = p.firefox.launch(headless=False)
-#         context = browser.new_context()
-#         page = context.new_page()
-#         page.goto("https://atcoder.jp/login")
-
-#         while True:
-#             requestedUrl = q.get()
-#             response = page.goto(requestedUrl)
-#             data = response.json()
-#             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
 
 fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
 fetchWithBrowserThread.start()
