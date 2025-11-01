@@ -93,7 +93,7 @@ class Contest:
     def new_comer_aperf(self) -> int:
         # ABC
         if self.rate_range == "- 1999":
-            return 800
+            return 1200
         # ARC
         if self.rate_range == "1200 - 2399" or self.rate_range == "1600 - 2999":
             return 1000
