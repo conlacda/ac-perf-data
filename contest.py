@@ -92,8 +92,11 @@ class Contest:
     @property
     def new_comer_aperf(self) -> int:
         # ABC
+        # https://atcoder.jp/posts/1592 ?? 800 ? 1200?
+        # Although they said that this becomes 1200 from ABC430 
+        # but it was still using 800 instead of 1200
         if self.rate_range == "- 1999":
-            return 1200
+            return 800
         # ARC
         if self.rate_range == "1200 - 2399" or self.rate_range == "1600 - 2999":
             return 1000
