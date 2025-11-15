@@ -102,7 +102,7 @@ class Contest:
         # Although they said that this becomes 1200 from ABC430
         # but it was still using 800 instead of 1200
         if self.rate_range == "- 1999":
-            return 800
+            return 1200
         # ARC
         if self.rate_range == "1200 - 2399" or self.rate_range == "1600 - 2999":
             return 1000
