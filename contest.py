@@ -6,7 +6,13 @@ from fetch import fetch
 from bs4 import BeautifulSoup
 from typing import List, Literal
 from datetime import datetime, timedelta, timezone
-from constants import ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY, HEURISTIC_CONTEST_LIST, PERF_BY_RANKING, RESULT_URL, STANDING_URL
+from constants import (
+    ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY,
+    HEURISTIC_CONTEST_LIST,
+    PERF_BY_RANKING,
+    RESULT_URL,
+    STANDING_URL,
+)
 from util import commit_to_github
 from constants import CONTEST_TYPE_DUMP
 import json
@@ -53,10 +59,10 @@ class Contest:
 
     def get_standings(self):
         from fetch import requestForFetch, getRequestedData
+
         standingsUrl = STANDING_URL.format(self.short_name)
         requestForFetch(standingsUrl)
         return getRequestedData(standingsUrl)
-        
 
     def get_participants(self, only_rated: bool = False) -> List[str]:
         data = self.get_standings()
@@ -93,7 +99,7 @@ class Contest:
     def new_comer_aperf(self) -> int:
         # ABC
         # https://atcoder.jp/posts/1592 ?? 800 ? 1200?
-        # Although they said that this becomes 1200 from ABC430 
+        # Although they said that this becomes 1200 from ABC430
         # but it was still using 800 instead of 1200
         if self.rate_range == "- 1999":
             return 800
@@ -129,6 +135,7 @@ class Contest:
 
     def sync_competition_history_if_fixed_result_available(self):
         from user import User
+
         res = fetch(RESULT_URL.format(self.short_name), "json")
         if len(res) == 0:
             print("Fetch failed")
@@ -138,10 +145,10 @@ class Contest:
                 user = User(item.get("UserScreenName"))
                 user.competition_history(self.type, refresh=True)
 
-
     # Cập nhật lịch sử thi đấu của toàn bộ người dùng
     def update_competition_history_if_fixed_result_available(self) -> bool:
         from user import User
+
         res = fetch(RESULT_URL.format(self.short_name), "json")
         if len(res) == 0:
             return False
@@ -161,34 +168,37 @@ class Contest:
                     # performance nhỏ hơn perf max nên là inner và rounded như nhau
                     inner_performance = rounded_performance
                     contestShortName = item["ContestScreenName"].split(".")[0]
-                    existed = contestShortName in competion_history.get("ContestShortName", [])
+                    existed = contestShortName in competion_history.get(
+                        "ContestShortName", []
+                    )
                     if existed:
                         continue
 
                     competion_history["InnerPerformance"].append(inner_performance)
                     competion_history["RoundedPerformance"].append(rounded_performance)
-                    endTime = datetime.fromisoformat(item.get("EndTime")).astimezone(timezone.utc)
+                    endTime = datetime.fromisoformat(item.get("EndTime")).astimezone(
+                        timezone.utc
+                    )
                     competion_history["ContestEndTime"].append(endTime)
                     competion_history["Weight"].append(self.weight)
                     competion_history["ContestShortName"].append(contestShortName)
                     user.save_performance_history(competion_history, self.type)
         return True
 
-
     # Dưới 1 ngày thì là short contest
     # Heuristic short contest có weight = 0.5, long có weight = 1
     def is_short_contest(self) -> bool:
         return self.duration < 1 * 24 * 60 * 60
 
-
     @property
     def weight(self) -> float:
-        if self.type == 'heuristic' \
-            and self.start_time > datetime(2025, 1, 1).astimezone(timezone.utc) \
-            and self.is_short_contest():
+        if (
+            self.type == "heuristic"
+            and self.start_time > datetime(2025, 1, 1).astimezone(timezone.utc)
+            and self.is_short_contest()
+        ):
             return 0.5
         return 1
-
 
     def is_started(self) -> bool:
         return self.start_time < datetime.now().astimezone(timezone.utc)
@@ -210,6 +220,7 @@ class Contest:
     # không quan tâm thứ tự, chỉ cần [aperf1, aperf2, ...]
     def get_average_inner_performance_of_all_participants(self):
         from user import User
+
         standings = self.get_standings()
         # In case, fetch the contest standings failed
         if standings is None:
@@ -217,16 +228,21 @@ class Contest:
 
         participants: List[str] = self.get_participants(only_rated=True)
         print(f"{len(participants)} rated users joined {self.short_name}")
-        return [User(username).average_inner_performance(self) for username in tqdm(participants)]
-
+        return [
+            User(username).average_inner_performance(self)
+            for username in tqdm(participants)
+        ]
 
     # Dựa vào performance của toàn bộ participant, tính ra performance của người thứ 1, 2, ..., n trong contest
     # Từ performance ở contest này kết hợp với dữ liệu đã có thì tính ra rating
     # Hàm này giống nhau ở cả 2 loại contest
-    def calculate_performance_in_contest(self, average_innerperformance: List[float], save_to_file: bool = True):
+    def calculate_performance_in_contest(
+        self, average_innerperformance: List[float], save_to_file: bool = True
+    ):
         print(f"Calculating the performance in contest - {self.short_name}")
         perf_in_contest: List[int] = []
         n = len(average_innerperformance)
+
         @cache
         def perf2Rank(perf):
             ans = 0
@@ -261,35 +277,45 @@ class Contest:
     # Gói toàn bộ lịch sử thi đấu của user (ko kể rated hay unrated) rồi gửi về client
     # Do algo ko yêu cầu ngày tháng + weight nên algo và heuristic được xử lý khác nhau
     def dump_rounded_performance_history_of_all(self) -> None:
-        print(f"Creating {ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(self.short_name)} file")
-        if self.type == 'algo':
+        print(
+            f"Creating {ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(self.short_name)} file"
+        )
+        if self.type == "algo":
             self.dump_all_algo()
         else:
             self.dump_all_heuristic()
 
     def dump_all_algo(self):
         from user import User
+
         participants: List[str] = self.get_participants(only_rated=True)
         data: dict[str, List[int]] = {}
         print(f"Generating competition history of all participants {self.short_name}")
         for participant in tqdm(participants):
             perfs = User(participant).competition_history(self.type)
-            data[participant] = perfs.get('RoundedPerformance')
+            data[participant] = perfs.get("RoundedPerformance")
 
-        with open(ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(self.short_name), "w") as f:
+        with open(
+            ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(self.short_name), "w"
+        ) as f:
             json.dump(data, f)
-
 
     def dump_all_heuristic(self):
         from user import User
+
         participants: List[str] = self.get_participants(only_rated=True)
         data: dict[str, List[int]] = {}
         print(f"Generating competition history of all participants {self.short_name}")
         for participant in tqdm(participants):
             perfs = User(participant).competition_history(self.type)
-            data[participant] = [perfs.get('RoundedPerformance'), perfs.get('ContestShortName')]
+            data[participant] = [
+                perfs.get("RoundedPerformance"),
+                perfs.get("ContestShortName"),
+            ]
 
-        with open(ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(self.short_name), "w") as f:
+        with open(
+            ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY.format(self.short_name), "w"
+        ) as f:
             json.dump(data, f)
 
 
@@ -326,7 +352,7 @@ class ContestManager:
 
         for contest in new_cnts:
             # Hiện tại chỉ cần file chứa heuristic contest để lấy ra được thời gian
-            if contest.type == 'heuristic':
+            if contest.type == "heuristic":
                 self.add_contest_to_list(contest)
 
         if is_rated:
@@ -379,12 +405,12 @@ class ContestManager:
 
         contest_json = {
             "type": contest.type,
-            "start_time": contest.start_time.strftime('%Y-%m-%d %H:%M:%S'),
+            "start_time": contest.start_time.strftime("%Y-%m-%d %H:%M:%S"),
             "short_name": contest.short_name,
             "duration": contest.duration,
             "link": contest.link,
             "is_short": contest.is_short_contest(),
-            "weight": contest.weight
+            "weight": contest.weight,
         }
         if contest_json not in contests:
             contests.append(contest_json)
@@ -404,9 +430,12 @@ class ContestManager:
 
     # Generate danh sách contest bằng việc fetch html từ Atcoder rồi extract dữ liệu
     def fetch_all_heuristic_contest_list(self):
-        NUMBER_OF_PAGES = 2 # tại thời điểm code thì có 2 page của heuristic contest
+        NUMBER_OF_PAGES = 2  # tại thời điểm code thì có 2 page của heuristic contest
         for page in range(1, NUMBER_OF_PAGES + 1):
-            source = fetch(f"https://atcoder.jp/contests/archive?category=0&page={page}&ratedType=4", "text")
+            source = fetch(
+                f"https://atcoder.jp/contests/archive?category=0&page={page}&ratedType=4",
+                "text",
+            )
             soup = BeautifulSoup(source, features="html.parser")
             table = soup.find("table")
             rows = table.find("tbody").find_all("tr")
@@ -425,12 +454,10 @@ class ContestManager:
         with open(HEURISTIC_CONTEST_LIST, "w") as f:
             json.dump(contests, f, indent=4)
 
-
     # Tìm ra contest với contest_name
     def find_contest(self, contest_name: str) -> dict | None:
         contests = self.contest_list()
         for contest in contests:
-            if contest['short_name'] == contest_name:
+            if contest["short_name"] == contest_name:
                 return contest
         raise Exception(f"ERROR: contest {contest_name} not found")
-
