@@ -120,7 +120,8 @@ class User:
         with open(f"competition-history/{contest_type}/{self.username}.json", "r") as f:
             return json.load(f)
 
-
+    def sync_competition_history():
+        
     # So sánh nếu số lần tham gia contest lấy từ Atcoder và local khác nhau thì xóa file vì dữ liệu ko khớp
     def removeIfHistoryObsolete(self, competition_num: int, contest_type: Literal["algo", "heuristic"]):
         file = COMPETITION_HISTORY.format(contest_type=contest_type, username=self.username)
