@@ -140,7 +140,7 @@ class Contest:
     
     def sync_competitive_history(self):
         from user import User
-        res = fetch(RESULT_URL.format(self.short_name), "json")
+        res = fetch(STANDING_URL.format(self.short_name), "json")
         if len(res) == 0:
             print("Fetch failed")
             return
