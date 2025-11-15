@@ -137,18 +137,7 @@ class Contest:
             if item.get("IsRated"):
                 user = User(item.get("UserScreenName"))
                 user.competition_history(self.type, refresh=True)
-    
-    # Sync the competition history of all users in contest regardless finished or running
-    def sync_competitive_history(self):
-        from user import User
-        res = fetch(STANDING_URL.format(self.short_name), "json")
-        if len(res) == 0:
-            print("Fetch failed")
-            return
-        for item in tqdm(res):
-            if item.get("IsRated"):
-                user = User(item.get("UserScreenName"))
-                user.competition_history(self.type, refresh=True)
+
 
     # Cập nhật lịch sử thi đấu của toàn bộ người dùng
     def update_competition_history_if_fixed_result_available(self) -> bool:
