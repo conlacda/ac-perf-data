@@ -138,6 +138,7 @@ class Contest:
                 user = User(item.get("UserScreenName"))
                 user.competition_history(self.type, refresh=True)
     
+    # Sync the competition history of all users in contest regardless finished or running
     def sync_competitive_history(self):
         from user import User
         res = fetch(STANDING_URL.format(self.short_name), "json")
