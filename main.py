@@ -80,7 +80,7 @@ def update_users_perf_based_on_final_result(
 
 
 if __name__ == "__main__":
-    schedule.every(3).minutes.do(create_jobs_from_contests_list)
+    schedule.every(1).minutes.do(create_jobs_from_contests_list)
     while True:
         schedule.run_pending()
         time.sleep(1)
