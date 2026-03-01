@@ -62,7 +62,7 @@ def getRequestedData(url: str):
 
 
 def fetchWithBrowser(retry: int = 15):
-    with SB(uc=True, locale="en") as sb:
+    with SB(binary_location="/var/lib/flatpak/app/com.google.Chrome/current/active/files/extra/google-chrome", uc=True, locale="en") as sb:
         for _ in range(retry):
             sb.activate_cdp_mode("https://atcoder.jp/login")
             sb.sleep(10)
@@ -95,5 +95,5 @@ def fetchWithBrowser(retry: int = 15):
             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
 
 
-# fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
-# fetchWithBrowserThread.start()
+fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
+fetchWithBrowserThread.start()
