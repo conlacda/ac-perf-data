@@ -38,7 +38,7 @@ def create_jobs_from_contests_list():
             ).do(generate_performance_files, contest=contest)
 
     upcoming_contests: list[Contest] = contest_manager.upcoming_contests(
-        timedelta_hours=2
+        timedelta_hours=5
     )
     # Get the performance history of participants 1 hour before the contest starts
     print(
