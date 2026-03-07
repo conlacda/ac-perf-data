@@ -9,6 +9,13 @@ from util import commit_to_github
 def create_jobs_from_contests_list():
     contest_manager = ContestManager()
     active_contests: list[Contest] = contest_manager.new_contests()
+    active_contests = [Contest(
+        start_time="2025-10-12 14:30:00+0530",
+        name='Ⓐabc447',
+        link='contests/abc448',
+        duration_str="100:00",
+        rate_range="- 1999"
+    )]
     print(
         f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}"
     )
@@ -80,7 +87,7 @@ def update_users_perf_based_on_final_result(
 
 
 if __name__ == "__main__":
-    schedule.every(3).minutes.do(create_jobs_from_contests_list)
+    schedule.every(1).minutes.do(create_jobs_from_contests_list)
     while True:
         schedule.run_pending()
         time.sleep(1)
