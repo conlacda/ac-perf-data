@@ -11,10 +11,10 @@ def create_jobs_from_contests_list():
     active_contests: list[Contest] = contest_manager.new_contests()
     active_contests = [Contest(
         start_time="2025-10-12 14:30:00+0530",
-        name='Ⓗahc062',
-        link='contests/ahc062',
+        name='Ⓐabc449',
+        link='contests/abc449',
         duration_str="100:00",
-        rate_range="All"
+        rate_range="- 1999"
     )]
     print(
         f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}"
