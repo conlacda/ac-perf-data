@@ -14,7 +14,7 @@ def create_jobs_from_contests_list():
         name='Ⓗahc062',
         link='contests/ahc062',
         duration_str="100:00",
-        rate_range="- 1999"
+        rate_range="All"
     )]
     print(
         f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}"
