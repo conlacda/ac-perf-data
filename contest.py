@@ -374,7 +374,7 @@ class ContestManager:
         return new_cnts
 
     def _get_contests(
-        self, title: Literal["Active Contests", "Upcoming Contests"]
+        self, title: Literal["Ongoing Contests", "Upcoming Contests"]
     ) -> List[Contest]:
         source = fetch("https://atcoder.jp/contests/", "text")
         soup = BeautifulSoup(source, features="html.parser")
@@ -401,7 +401,7 @@ class ContestManager:
         return contests
 
     def _active_contests(self) -> List[Contest]:
-        return self._get_contests("Active Contests")
+        return self._get_contests("Ongoing Contests")
 
     def _upcoming_contests(self) -> List[Contest]:
         return self._get_contests("Upcoming Contests")
