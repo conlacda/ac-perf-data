@@ -9,6 +9,13 @@ from util import commit_to_github
 def create_jobs_from_contests_list():
     contest_manager = ContestManager()
     active_contests: list[Contest] = contest_manager.new_contests()
+    active_contests.append(Contest(
+        start_time="2025-10-12 14:30:00+0530",
+        name='Ⓗahc063',
+        link='contests/ahc063',
+        duration_str="240:00",
+        rate_range="All"
+    ))
     print(
         f"There are {len(active_contests)} new active contests - {[c.short_name for c in active_contests]}"
     )
