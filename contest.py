@@ -88,11 +88,10 @@ class Contest:
     def is_rated(self) -> bool:
         return self.rate_range in [
             "- 1999",
-            "1200 - 2399",
+            "800 - 2399",
             "1600 - 2999",
             "1200 - 2799",
             "2000 -",
-            "800 - 2399",
             "All",
         ]
 
@@ -105,10 +104,11 @@ class Contest:
         if self.rate_range == "- 1999":
             return 1200
         # ARC
-        if self.rate_range == "1200 - 2399" or self.rate_range == "1600 - 2999" :
-            return 1000
-        # unusual ARC
-        if self.rate_range == "1200 - 2799" or self.rate_range == "800 - 2399":
+        if (
+            self.rate_range == "800 - 2399"
+            or self.rate_range == "1200 - 2799"
+            or self.rate_range == "1600 - 2999"
+        ):
             return 1000
         # AGC
         if self.rate_range == "2000 -":
@@ -121,13 +121,13 @@ class Contest:
         # ABC
         if self.rate_range == "- 1999":
             return 2400
-        # ARC Div 2
-        if self.rate_range == "1200 - 2399" or self.rate_range == "800 - 2399":
+        # ARC https://atcoder.jp/posts/2026ARC_en
+        if self.rate_range == "800 - 2399":
             return 2800
-        if self.rate_range == "1600 - 2999":
-            return 3400
         if self.rate_range == "1200 - 2799":
             return 3200
+        if self.rate_range == "1600 - 2999":
+            return 3400
         # AGC
         if self.rate_range == "2000 -":
             return 4500
