@@ -124,7 +124,7 @@ class Contest:
         # ARC Div 2
         if self.rate_range == "1200 - 2399":
             return 2800
-        if self.rate_range == "1600 - 2999" or self.rate_range == "800 - 2999":
+        if self.rate_range == "1600 - 2999" or self.rate_range == "800 - 2399":
             return 3400
         if self.rate_range == "1200 - 2799":
             return 3200
