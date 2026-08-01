@@ -1,7 +1,9 @@
-import schedule
 import time
-from contest import ContestManager, Contest
 from datetime import timedelta
+
+import schedule
+
+from contest import Contest, ContestManager
 from util import commit_to_github
 
 

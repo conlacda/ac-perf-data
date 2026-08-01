@@ -1,14 +1,15 @@
-from typing import Literal, Union
-import time
-import requests
-from dotenv import load_dotenv
-from seleniumbase import SB
-from os import getenv
-from bs4 import BeautifulSoup
 import json
-import threading
 import queue
 import sys
+import threading
+import time
+from os import getenv
+from typing import Literal
+
+import requests
+from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+from seleniumbase import SB
 
 session = requests.Session()
 load_dotenv()
@@ -23,7 +24,7 @@ def fetch(
     output_format: Literal["json", "text"] = "json",
     retry: int = 10,
     sleep_time_after_failing: int = 2,  # seconds
-) -> Union[dict, str]:
+) -> dict | str:
     time.sleep(0.7)
     retry_count: int = 0
     while retry_count < retry:
@@ -89,7 +90,7 @@ def fetchWithBrowser(retry: int = 15):
             soup = BeautifulSoup(page_source, "html.parser")
             pre_tag = soup.find("pre")
             if pre_tag is None:
-                return None  # fetch fails
+                return  # fetch fails
             data = json.loads(pre_tag.text)
             # Store to cache
             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
