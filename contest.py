@@ -472,8 +472,6 @@ class ContestManager:
 
     def find_contest(self, contest_name: str) -> dict | None:
         contests = self.contest_list()
-        print(contests)
-        print(contest_name)
         for contest in contests:
             if contest["short_name"] == contest_name:
                 return contest
