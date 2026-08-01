@@ -1,21 +1,23 @@
-from functools import cache
+import json
 import math
 import os
-from tqdm import tqdm
-from fetch import fetch
-from bs4 import BeautifulSoup
-from typing import List, Literal
 from datetime import datetime, timedelta, timezone
+from functools import cache
+from typing import Literal
+
+from bs4 import BeautifulSoup
+from tqdm import tqdm
+
 from constants import (
     ALL_PARTICIPANTS_ROUNDED_PERF_HISTORY,
+    CONTEST_TYPE_DUMP,
     HEURISTIC_CONTEST_LIST,
     PERF_BY_RANKING,
     RESULT_URL,
     STANDING_URL,
 )
+from fetch import fetch
 from util import commit_to_github
-from constants import CONTEST_TYPE_DUMP
-import json
 
 
 class Contest:
@@ -58,13 +60,13 @@ class Contest:
         return self.short_name == other.short_name
 
     def get_standings(self):
-        from fetch import requestForFetch, getRequestedData
+        from fetch import getRequestedData, requestForFetch
 
         standingsUrl = STANDING_URL.format(self.short_name)
         requestForFetch(standingsUrl)
         return getRequestedData(standingsUrl)
 
-    def get_participants(self, only_rated: bool = False) -> List[str]:
+    def get_participants(self, only_rated: bool = False) -> list[str]:
         data = self.get_standings()
         # In a heuristic contest, IsRated is always true, but a user who has not committed is considered as unrated user.
         if self.type == "heuristic":
@@ -240,7 +242,7 @@ class Contest:
         if standings is None:
             return []
 
-        participants: List[str] = self.get_participants(only_rated=True)
+        participants: list[str] = self.get_participants(only_rated=True)
         print(f"{len(participants)} rated users joined {self.short_name}")
         return [
             User(username).average_inner_performance(self)
@@ -251,10 +253,10 @@ class Contest:
     # Từ performance ở contest này kết hợp với dữ liệu đã có thì tính ra rating
     # Hàm này giống nhau ở cả 2 loại contest
     def calculate_performance_in_contest(
-        self, average_innerperformance: List[float], save_to_file: bool = True
+        self, average_innerperformance: list[float], save_to_file: bool = True
     ):
         print(f"Calculating the performance in contest - {self.short_name}")
-        perf_in_contest: List[int] = []
+        perf_in_contest: list[int] = []
         n = len(average_innerperformance)
 
         @cache
@@ -302,8 +304,8 @@ class Contest:
     def dump_all_algo(self):
         from user import User
 
-        participants: List[str] = self.get_participants(only_rated=True)
-        data: dict[str, List[int]] = {}
+        participants: list[str] = self.get_participants(only_rated=True)
+        data: dict[str, list[int]] = {}
         print(f"Generating competition history of all participants {self.short_name}")
         for participant in tqdm(participants):
             perfs = User(participant).competition_history(self.type)
@@ -317,8 +319,8 @@ class Contest:
     def dump_all_heuristic(self):
         from user import User
 
-        participants: List[str] = self.get_participants(only_rated=True)
-        data: dict[str, List[int]] = {}
+        participants: list[str] = self.get_participants(only_rated=True)
+        data: dict[str, list[int]] = {}
         print(f"Generating competition history of all participants {self.short_name}")
         for participant in tqdm(participants):
             perfs = User(participant).competition_history(self.type)
@@ -334,17 +336,17 @@ class Contest:
 
 
 class ContestManager:
-    _contest_names: List[str] = []
-    _resolved_upcoming_contest_names: List[str] = []
+    _contest_names: list[str] = []
+    _resolved_upcoming_contest_names: list[str] = []
 
     def __init__(self):
         pass
 
-    def upcoming_contests(self, timedelta_hours=1) -> List[Contest]:
+    def upcoming_contests(self, timedelta_hours=1) -> list[Contest]:
         """
         Retrieve upcoming contests that are within a specified time delta from now.
         """
-        contests: List[Contest] = []
+        contests: list[Contest] = []
         for contest in self._upcoming_contests():
             timediff = contest.start_time - datetime.now().astimezone(timezone.utc)
             if (timediff <= timedelta(hours=timedelta_hours)) and (
@@ -355,10 +357,10 @@ class ContestManager:
         return contests
 
     # get new contests after the previous session
-    def new_contests(self, is_rated: bool = True) -> List[Contest]:
+    def new_contests(self, is_rated: bool = True) -> list[Contest]:
         # Create jobs for active contests only to reduce the complexity of job scheduling.
         active_contests = self._active_contests()
-        new_cnts: List[Contest] = []
+        new_cnts: list[Contest] = []
         for active_contest in active_contests:
             if active_contest.short_name not in self._contest_names:
                 new_cnts.append(active_contest)
@@ -376,7 +378,7 @@ class ContestManager:
 
     def _get_contests(
         self, title: Literal["Ongoing Contests", "Upcoming Contests"]
-    ) -> List[Contest]:
+    ) -> list[Contest]:
         source = fetch("https://atcoder.jp/contests/", "text")
         soup = BeautifulSoup(source, features="html.parser")
         constests_h3 = soup.find("h3", string=title)
@@ -388,7 +390,7 @@ class ContestManager:
         upcoming_contest_table = div.find("table")
         rows = upcoming_contest_table.find("tbody").find_all("tr")
 
-        contests: List[Contest] = []
+        contests: list[Contest] = []
         for row in rows:
             tds = row.find_all("td")
             contest = Contest(
@@ -401,10 +403,10 @@ class ContestManager:
             contests.append(contest)
         return contests
 
-    def _active_contests(self) -> List[Contest]:
+    def _active_contests(self) -> list[Contest]:
         return self._get_contests("Ongoing Contests")
 
-    def _upcoming_contests(self) -> List[Contest]:
+    def _upcoming_contests(self) -> list[Contest]:
         return self._get_contests("Upcoming Contests")
 
     # Thêm contest vào danh sách rồi lưu thành 1 file
@@ -435,7 +437,7 @@ class ContestManager:
     # Lưu ý cái này lúc load ra đang để nguyên là json chứ ko convert ra contest object
     # Hiện tại chỉ có heuristic contest được dump vào file
     # Algorithm contest hiện tại không cần tới thông tin ngày tháng, long/short contest
-    def contest_list(self) -> List:
+    def contest_list(self) -> list:
         if not os.path.exists(HEURISTIC_CONTEST_LIST):
             self.fetch_all_heuristic_contest_list()
 
@@ -468,9 +470,10 @@ class ContestManager:
         with open(HEURISTIC_CONTEST_LIST, "w") as f:
             json.dump(contests, f, indent=4)
 
-    # Tìm ra contest với contest_name
     def find_contest(self, contest_name: str) -> dict | None:
         contests = self.contest_list()
+        print(contests)
+        print(contest_name)
         for contest in contests:
             if contest["short_name"] == contest_name:
                 return contest

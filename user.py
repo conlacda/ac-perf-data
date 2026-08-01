@@ -1,7 +1,8 @@
-from datetime import datetime, timezone
 import json
 import os
-from typing import List, Literal
+from datetime import datetime, timezone
+from typing import Literal
+
 from constants import COMPETITION_HISTORY, COMPETITION_HISTORY_URL
 from contest import Contest, ContestManager
 from fetch import fetch
@@ -22,8 +23,8 @@ class User:
     # Performance tính bằng binary search đang lệch +- 5 điểm (Đang sai lệch): TODO
     # Khi có performance, dựa vào lịch sử thi đấu tính rating đang đúng
     def average_inner_performance(self, contest: Contest):
-        chistory: dict[str, List[int]] = self.competition_history(contest.type)
-        perf_arr = chistory['InnerPerformance']
+        chistory: dict[str, list[int]] = self.competition_history(contest.type)
+        perf_arr = chistory["InnerPerformance"]
 
         if len(perf_arr) == 0:
             return contest.new_comer_aperf
@@ -35,7 +36,7 @@ class User:
             numerator += pow(0.9, i + 1) * perf_arr[i]
             denominator += pow(0.9, i + 1)
         return numerator / denominator
-    
+
     # Chạy cho heuristic contest - ko dùng tới - phần này client dùng chứ ko có ở server
     # def decayedPerformance(self, competion_history: dict[str, List[int]]) -> List[float]:
     #     competion_num = len(competion_history['InnerPerformance'])
@@ -63,7 +64,7 @@ class User:
         data = fetch(
             COMPETITION_HISTORY_URL[contest_type].format(self.username), "json"
         )
-        result: dict[str, List[int]] = {
+        result: dict[str, list[int]] = {
             "RoundedPerformance": [],
             "InnerPerformance": [],
             "ContestEndTime": [],
@@ -92,8 +93,10 @@ class User:
         return result
 
     # Lưu lại lịch sử performance của người dùng
-    def save_performance_history(self, data: dict[str, List[int]], contest_type: str):
-        file = COMPETITION_HISTORY.format(contest_type=contest_type, username=self.username)
+    def save_performance_history(self, data: dict[str, list[int]], contest_type: str):
+        file = COMPETITION_HISTORY.format(
+            contest_type=contest_type, username=self.username
+        )
         with open(file, "w") as f:
             json.dump(data, f, default=str)
 
@@ -111,7 +114,9 @@ class User:
             'ContestShortName': []
         }
         """
-        file = COMPETITION_HISTORY.format(contest_type=contest_type, username=self.username)
+        file = COMPETITION_HISTORY.format(
+            contest_type=contest_type, username=self.username
+        )
         if refresh or not os.path.exists(file):
             perfs = self.fetch_competition_history(contest_type)
             self.save_performance_history(perfs, contest_type)
@@ -122,14 +127,20 @@ class User:
 
     def sync_competition_history(self, contest_type: Literal["algo", "heuristic"]):
         perfs = self.fetch_competition_history(contest_type)
-        self.save_performance_history(perfs, contest_type) 
-
+        self.save_performance_history(perfs, contest_type)
 
     # So sánh nếu số lần tham gia contest lấy từ Atcoder và local khác nhau thì xóa file vì dữ liệu ko khớp
-    def removeIfHistoryObsolete(self, competition_num: int, contest_type: Literal["algo", "heuristic"]):
-        file = COMPETITION_HISTORY.format(contest_type=contest_type, username=self.username)
+    def removeIfHistoryObsolete(
+        self, competition_num: int, contest_type: Literal["algo", "heuristic"]
+    ):
+        file = COMPETITION_HISTORY.format(
+            contest_type=contest_type, username=self.username
+        )
         if os.path.exists(file):
             local_competition_history = self.competition_history(contest_type)
-            if (len(local_competition_history.get("RoundedPerformance")) != competition_num):
+            if (
+                len(local_competition_history.get("RoundedPerformance"))
+                != competition_num
+            ):
                 print(f"Remove obsolete history file {file}")
                 os.remove(file)
