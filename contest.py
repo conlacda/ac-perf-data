@@ -113,7 +113,7 @@ class Contest:
         ):
             return 1000
         # AGC
-        if self.rate_range == "2000 -":
+        if self.rate_range == "2000 -" or self.rate_range == "2800 -":
             return 1200
         # The default performance for new comers of AHC is 1000
         return 1000
@@ -131,7 +131,7 @@ class Contest:
         if self.rate_range == "1600 - 2999":
             return 3400
         # AGC
-        if self.rate_range == "2000 -":
+        if self.rate_range == "2000 -" or self.rate_range == "2800 -":
             return 4500
         # AHC
         return 4500
