@@ -799,5 +799,14 @@
         "link": "/contests/ahc_genai_test_2026",
         "is_short": false,
         "weight": 1
+    },
+    {
+        "type": "heuristic",
+        "start_time": "2026-10-30 10:00:00",
+        "short_name": "ahc074",
+        "duration": 864000,
+        "link": "/contests/ahc074",
+        "is_short": false,
+        "weight": 1
     }
 ]
