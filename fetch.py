@@ -96,5 +96,5 @@ def fetchWithBrowser(retry: int = 15):
             fetchedData[requestedUrl] = {"data": data, "timestamp": time.time()}
 
 
-fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
-fetchWithBrowserThread.start()
+#fetchWithBrowserThread = threading.Thread(target=fetchWithBrowser)
+#fetchWithBrowserThread.start()
